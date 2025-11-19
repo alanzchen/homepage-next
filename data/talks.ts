@@ -1,5 +1,13 @@
 export const talks = [
   {
+    conference: "UT Austin",
+    title: "Guest Lecture: Finding Humanness in Human-AI Collaboration",
+    location: "Online",
+    date: "Nov 18, 2025",
+    invited: true,
+    discussant: false
+  },
+  {
     conference: "Workshop on Information Technologies and Systems (WITS)",
     title: "The Implications of Review Display Policies for Platforms' Incentives to Tackle Fake Reviews: A Game-Theoretic Analysis (by Zhe Wang, Dengpan Liu, Subodha Kumar)",
     location: "Bangkok, Thailand",
