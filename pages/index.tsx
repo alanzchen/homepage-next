@@ -16,7 +16,14 @@ import { IconExternalLink } from "../components/Icons";
 
 
 
-const futureTalks = talks.filter((talk) => new Date(talk.date) > new Date());
+const now = new Date();
+const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+const futureTalks = talks.filter((talk) => new Date(talk.date) > now);
+const recentPastTalks = talks.filter((talk) => {
+  const talkDate = new Date(talk.date);
+  return talkDate < now && talkDate >= oneMonthAgo;
+});
 
 type HomeProps = {
   posts: Post[];
@@ -70,15 +77,28 @@ export default function Home({ posts, projects, publications }: HomeProps) {
             />
           </div>
         </div>
-        {futureTalks.length > 0 && (
+        {(futureTalks.length > 0 || recentPastTalks.length > 0) && (
         <div
           className="flex flex-col gap-8 animate-in"
           style={{ "--index": 2 } as React.CSSProperties}
         >
-          <h2>Upcoming Talks</h2>
-          <ul className="flex flex-col gap-8">
-            {TalkList(futureTalks)}
-          </ul>
+          <h2>Talks</h2>
+          {futureTalks.length > 0 && (
+            <div className="flex flex-col gap-4">
+              <h3 className="text-secondary">Upcoming</h3>
+              <ul className="flex flex-col gap-8">
+                {TalkList(futureTalks)}
+              </ul>
+            </div>
+          )}
+          {recentPastTalks.length > 0 && (
+            <div className="flex flex-col gap-4">
+              <h3 className="text-secondary">Recent</h3>
+              <ul className="flex flex-col gap-8">
+                {TalkList(recentPastTalks)}
+              </ul>
+            </div>
+          )}
         </div>
         )}
         <div
