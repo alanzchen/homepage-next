@@ -1,5 +1,19 @@
 export const talks = [
   {
+    conference: "Workshop on Information Systems and Economics (WISE)",
+    title: "Lost in Thoughts: Revealing AI Reasoning Increases Trust but Crowds Out Unique Human Knowledge",
+    location: "Nashville, Tennessee",
+    date: "Dec 18, 2025"
+  },
+  {
+    conference: "Workshop on Information Systems and Economics (WISE)",
+    title: "Modeling the Interviewer: Leveraging LLMs to Uncover Personality Mismatch Effects in Behavioral Interviews (by Rachit Kamdar, Balaji Padmanabhan, Siva Viswanathan)",
+    location: "Nashville, Tennessee",
+    date: "Dec 18, 2025",
+    invited: true,
+    discussant: true
+  },
+  {
     conference: "UT Austin",
     title: "Guest Lecture: Finding Humanness in Human-AI Collaboration",
     location: "Online",
