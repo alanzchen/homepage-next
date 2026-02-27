@@ -1,4 +1,17 @@
-export const talks = [
+export interface Talk {
+  conference: string;
+  title: string;
+  location: string;
+  date: string;
+  link?: string;
+  award?: string;
+  invited?: boolean;
+  discussant?: boolean;
+  // Keeps this conference at the top of the filter list.
+  pinned?: boolean;
+}
+
+export const talks: Talk[] = [
   {
     conference: "Workshop on Information Systems and Economics (WISE)",
     title: "Lost in Thoughts: Revealing AI Reasoning Increases Trust but Crowds Out Unique Human Knowledge",
