@@ -6,6 +6,7 @@ import { ChevronUpDownIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { NextSeo } from "next-seo";
 import { FullName, SiteURL } from "./about";
 import Award from "../components/Award";
+import AwardCountBadge from "../components/AwardCountBadge";
 import ConferenceCountBadge from "../components/ConferenceCountBadge";
 import { talks, type Talk } from "../data/talks";
 import conferenceShortNames from "../data/conferenceShortNames.json";
@@ -20,6 +21,7 @@ const futureTalks = talks.filter((talk) => new Date(talk.date) > new Date());
 interface ConferenceStat {
   conference: string;
   totalTalkCount: number;
+  awardCount: number;
   pinned: boolean;
 }
 
@@ -30,11 +32,13 @@ function getConferenceStats(allTalks: Talk[]): ConferenceStat[] {
     const currentConference = conferenceMap.get(talk.conference) ?? {
       conference: talk.conference,
       totalTalkCount: 0,
+      awardCount: 0,
       pinned: false,
       includeInFilter: false
     };
 
     currentConference.totalTalkCount += 1;
+    currentConference.awardCount += talk.award ? 1 : 0;
     currentConference.pinned = currentConference.pinned || Boolean(talk.pinned);
     currentConference.includeInFilter = currentConference.includeInFilter || !talk.invited || Boolean(talk.pinned);
     conferenceMap.set(talk.conference, currentConference);
@@ -42,14 +46,21 @@ function getConferenceStats(allTalks: Talk[]): ConferenceStat[] {
 
   return [...conferenceMap.values()]
     .filter((conference) => conference.includeInFilter)
-    .map(({ conference, totalTalkCount, pinned }) => ({
+    .map(({ conference, totalTalkCount, awardCount, pinned }) => ({
       conference,
       totalTalkCount,
+      awardCount,
       pinned
     }))
     .sort((a, b) => {
       if (a.pinned !== b.pinned) {
         return a.pinned ? -1 : 1;
+      }
+
+      const aHasAwards = a.awardCount > 0;
+      const bHasAwards = b.awardCount > 0;
+      if (aHasAwards !== bHasAwards) {
+        return aHasAwards ? -1 : 1;
       }
 
       if (a.totalTalkCount !== b.totalTalkCount) {
@@ -121,6 +132,9 @@ export default function Talks() {
   const conferenceStats = useMemo(() => getConferenceStats(talks), []);
   const conferenceCountByName = useMemo(() => new Map(
     conferenceStats.map((conference) => [conference.conference, conference.totalTalkCount] as const),
+  ), [conferenceStats]);
+  const awardCountByConference = useMemo(() => new Map(
+    conferenceStats.map((conference) => [conference.conference, conference.awardCount] as const),
   ), [conferenceStats]);
   const conferences = useMemo(() => (
     [ALL_TALKS, INVITED_TALKS, ...conferenceStats.map((conference) => conference.conference)]
@@ -270,6 +284,9 @@ export default function Talks() {
                 <Listbox.Options className="absolute mt-2 w-full p-2 overflow-auto text-base origin-top-right shadow-lg max-h-60 w-42 rounded-xl bg-blur backdrop-blur-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm scroll-smooth no-scrollbar">
                   {conferences.map((conference) => {
                     const conferenceCount = getCountForFilter(conference);
+                    const awardCount = (conference === ALL_TALKS || conference === INVITED_TALKS)
+                      ? 0
+                      : (awardCountByConference.get(conference) ?? 0);
 
                     return (
                       <Listbox.Option
@@ -282,10 +299,17 @@ export default function Talks() {
                       >
                         {({ selected }) => (
                           <>
-                            <div className={`${selected ? "font-medium" : "font-normal"} flex items-center justify-between gap-3`}>
-                              <span className="truncate">
-                                {getLabelForConference(conference)}
+                            {awardCount > 0 && !selected && (
+                              <span className="pointer-events-none absolute inset-y-0 left-0 z-0 flex items-center pl-2.5">
+                                <AwardCountBadge count={awardCount} />
                               </span>
+                            )}
+                            <div className={`${selected ? "font-medium" : "font-normal"} flex items-center justify-between gap-3`}>
+                              <div className="flex min-w-0 items-center">
+                                <span className="truncate">
+                                  {getLabelForConference(conference)}
+                                </span>
+                              </div>
                               {conferenceCount !== undefined && (
                                 <ConferenceCountBadge count={conferenceCount} />
                               )}
