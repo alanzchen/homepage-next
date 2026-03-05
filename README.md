@@ -30,8 +30,8 @@ Commands:
 ## CV Release Automation
 
 - GitHub Actions workflow: `.github/workflows/release-cv.yml`
-- Trigger: push to `master`/`main` when CV inputs change, or manual dispatch
+- Trigger: every push to `master`/`main`, or manual dispatch
 - Output release asset: `Zenan_Chen_CV.pdf`
 - Stable public URL from this site: `/cv`
 
-`/cv` redirects to the fixed `cv-latest` GitHub release asset URL so the website always serves the latest published CV PDF without changing the site link.
+The workflow uses `xu-cheng/texlive-action` to compile the PDF, and `/cv` redirects to the fixed `cv-latest` GitHub release asset URL so the website always serves the latest published CV PDF without changing the site link.

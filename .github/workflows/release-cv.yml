@@ -6,15 +6,6 @@ on:
     branches:
       - master
       - main
-    paths:
-      - "cv/**"
-      - "data/publication/**"
-      - "scripts/build-cv.mjs"
-      - "scripts/sync-cv.mjs"
-      - "shared/**"
-      - "package.json"
-      - "yarn.lock"
-      - ".github/workflows/release-cv.yml"
 
 permissions:
   contents: write
@@ -37,16 +28,21 @@ jobs:
           node-version: 18
           cache: yarn
 
-      - name: Install TeX Live
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Sync CV inputs
+        run: node scripts/sync-cv.mjs
+
       - name: Build CV PDF
-        run: yarn cv:build
+        uses: xu-cheng/texlive-action@v3
+        with:
+          texlive_version: 2025
+          run: |
+            cd cv
+            latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
+            cp main.pdf ../public/Zenan_Chen_CV.pdf
+            latexmk -c
 
       - name: Publish rolling CV release
         uses: ncipollo/release-action@v1
