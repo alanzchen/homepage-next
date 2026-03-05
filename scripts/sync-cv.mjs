@@ -160,15 +160,23 @@ function renderProfileSections(profile, publications) {
     lines.push("\\textit{No publications found in data/publication.}");
   }
 
+  const currentYear = String(new Date().getFullYear());
+
   publications.forEach((publication) => {
-    const yearLabel = publication.forthcoming ? "Forthcoming" : publication.publishedAt;
+    const yearLabel = publication.forthcoming ? currentYear : publication.publishedAt;
     const escapedTitle = escapeLatex(publication.title);
-    const journalSuffix = publication.journal ? `, \\emph{${escapeLatex(publication.journal)}}` : "";
+    const journalLabel = publication.forthcoming
+      ? publication.journal
+        ? `${publication.journal}, forthcoming`
+        : "forthcoming"
+      : publication.journal;
+    const journalSuffix = journalLabel ? `, \\emph{${escapeLatex(journalLabel)}}` : "";
+    const titleLineBreak = publication.authors?.length ? "\\\\[-0.2em]" : "\\\\";
 
     if (publication.url) {
-      lines.push(`\\years{${escapeLatex(yearLabel)}} \\href{${publication.url}}{\\textbf{${escapedTitle}}}${journalSuffix}\\\\`);
+      lines.push(`\\years{${escapeLatex(yearLabel)}}\\href{${publication.url}}{\\textbf{${escapedTitle}}}${journalSuffix}${titleLineBreak}`);
     } else {
-      lines.push(`\\years{${escapeLatex(yearLabel)}} \\textbf{${escapedTitle}}${journalSuffix}\\\\`);
+      lines.push(`\\years{${escapeLatex(yearLabel)}}\\textbf{${escapedTitle}}${journalSuffix}${titleLineBreak}`);
     }
 
     if (publication.authors?.length) {
