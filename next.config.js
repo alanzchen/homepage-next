@@ -11,6 +11,16 @@ const nextConfig = {
       { protocol: "https", hostname: "image.mux.com" },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/cv",
+        destination:
+          "https://github.com/alanzchen/homepage-next/releases/download/cv-latest/Zenan_Chen_CV.pdf",
+        permanent: false,
+      },
+    ];
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       require("./scripts/generate-sitemap");

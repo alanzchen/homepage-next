@@ -1,0 +1,57 @@
+name: Release CV PDF
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - "cv/**"
+      - "data/publication/**"
+      - "scripts/build-cv.mjs"
+      - "scripts/sync-cv.mjs"
+      - "shared/**"
+      - "package.json"
+      - "yarn.lock"
+      - ".github/workflows/release-cv.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  release-cv:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: yarn
+
+      - name: Install TeX Live
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y latexmk texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-fonts-extra
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build CV PDF
+        run: yarn cv:build
+
+      - name: Publish rolling CV release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: cv-latest
+          name: Latest CV
+          artifacts: public/Zenan_Chen_CV.pdf
+          allowUpdates: true
+          replacesArtifacts: true
+          removeArtifacts: true
+          makeLatest: true
+          body: Automated CV build from `${{ github.sha }}`.

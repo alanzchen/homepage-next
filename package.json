@@ -4,9 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/sync-cv.mjs",
     "build": "next build",
+    "build:all": "node scripts/build-cv.mjs && next build",
     "start": "next start",
     "lint": "next lint",
+    "cv:sync": "node scripts/sync-cv.mjs",
+    "cv:build": "node scripts/build-cv.mjs",
     "type-check": "./node_modules/.bin/tsc",
     "cache-clear": "./node_modules/.bin/contentlayer build --verbose --clearCache"
   },

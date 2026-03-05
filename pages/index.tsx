@@ -48,7 +48,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
             I study design and use of technologies to fully harness their benefits.
             <br />
             <br />
-            <Link href="https://go.zenan.ch/cv" >CV</Link>
+            <Link href="/cv" >CV</Link>
           </p>
         </div>
         <div className="right-0 -mt-20 overflow-hidden hidden md:block">
@@ -228,7 +228,7 @@ export const getStaticProps: GetStaticProps = async () => {
       (a, b) =>
         new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
     ).map((publication) => {
-      return pick(publication, ["slug", "title", "description", "publishedAt", "journal", "awards", "media_coverage", "url"])
+      return pick(publication, ["slug", "title", "description", "publishedAt", "journal", "awards", "media_coverage", "url", "forthcoming"])
     });
 
   return {

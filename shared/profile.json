@@ -1,0 +1,224 @@
+{
+  "identity": {
+    "fullName": "Zenan Chen",
+    "displayName": "Zenan ``Alan'' Chen",
+    "siteUrl": "https://zenan.ch",
+    "seoDescription": "Assistant Professor in Information Systems. For a more humane & productive future."
+  },
+  "contactLinks": [
+    { "label": "Email", "href": "mailto:contact@zenan.ch" },
+    { "label": "Twitter", "href": "https://twitter.com/chzenan" },
+    { "label": "LinkedIn", "href": "https://www.linkedin.com/in/chzenan/" },
+    { "label": "GitHub", "href": "https://github.com/alanzchen" }
+  ],
+  "cvHeader": {
+    "position": "Assistant Professor, Information Systems",
+    "institution": "Naveen Jindal School of Management",
+    "organization": "The University of Texas at Dallas",
+    "addressLine1": "800 W Campbell Road",
+    "addressLine2": "Richardson, TX 75080",
+    "emails": ["zenan.chen@utdallas.edu", "me@zenan.ch"],
+    "siteLabel": "zenan.ch"
+  },
+  "researchInterests": {
+    "topics": "Impacts of IS Artifacts Design and Usage, Digital Platforms",
+    "methods": "Experiments, Econometrics, Causal Inference, Analytical Modeling"
+  },
+  "academicAppointments": [
+    {
+      "time": "2024 -",
+      "institution": "University of Texas at Dallas, Naveen Jindal School of Management",
+      "location": "Richardson, TX",
+      "role": "Assistant Professor, Information Systems"
+    }
+  ],
+  "education": [
+    {
+      "title": "Ph.D. in Information Systems",
+      "description": "University of Minnesota",
+      "time": "2018 - 24",
+      "imageKey": "UMN",
+      "cvInstitution": "University of Minnesota",
+      "cvLocation": "Minneapolis, MN",
+      "cvDegree": "PhD in Business Administration (Information & Decision Sciences)",
+      "cvDissertation": "Design Considerations of IS Artifacts and Digital Platforms",
+      "cvHighlights": [
+        "INFORMS ISS Nunamaker-Chen Dissertation Award 2nd Runner-up",
+        "WITS Best Dissertation Award"
+      ]
+    },
+    {
+      "title": "B.A. in Economics",
+      "description": "CUHK, Shenzhen",
+      "time": "2014 - 18",
+      "imageKey": "CUHK",
+      "cvInstitution": "Chinese University of Hong Kong, Shenzhen",
+      "cvLocation": "Shenzhen, China",
+      "cvDegree": "Bachelor of Business Administration (Applied Economics)"
+    }
+  ],
+  "awards": [
+    {
+      "time": "2024",
+      "title": "Innovative Method Award @ this IS research",
+      "featuredOnWebsite": false
+    },
+    {
+      "time": "2024",
+      "title": "INFORMS ISS Nunamaker-Chen Dissertation Award",
+      "description": "2nd Runner-up",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2023",
+      "title": "Best Dissertation Award @ WITS",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2023",
+      "title": "Best Completed Research Paper Runner-up @ WeB",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2023",
+      "title": "Best Student Paper Runner-up @ CIST",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2022",
+      "title": "Best Paper Award @ ICIS, General Track",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2022",
+      "title": "Best Conference Paper Nominee @ ICIS",
+      "featuredOnWebsite": false
+    },
+    {
+      "time": "2022",
+      "title": "Best Student Paper Award @ WITS",
+      "description": "$1,000",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2021",
+      "title": "First Place @ China Bridge Case Competition",
+      "description": "$6,000",
+      "detail": "As Faculty Mentor, I coached a team of 4 undergraduate students.",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2022",
+      "title": "Carlson School of Management Dissertation Fellowship",
+      "description": "$28,000",
+      "detail": "Selectively awarded to top students within Carlson School of Management",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2021 - 22",
+      "title": "Ph.D. Student International Travel Fellowship",
+      "description": "$1,000, $1,200",
+      "featuredOnWebsite": false
+    },
+    {
+      "time": "2020",
+      "title": "Dean's Small Research Grant",
+      "description": "$3,000",
+      "featuredOnWebsite": true
+    },
+    {
+      "time": "2019 - 22",
+      "title": "Ph.D. Student Domestic Travel Fellowship",
+      "description": "$750",
+      "featuredOnWebsite": false
+    },
+    {
+      "time": "2018 - 22",
+      "title": "Ph.D. Summer Research Fellowship",
+      "description": "$5,000",
+      "featuredOnWebsite": false
+    },
+    {
+      "time": "2017",
+      "title": "Undergraduate Research Award, CUHK(SZ)",
+      "featuredOnWebsite": false
+    }
+  ],
+  "sideProjects": [
+    {
+      "title": "ChatGPT Quick Actions for Raycast",
+      "time": "2023",
+      "description": "Invoke ChatGPT anywhere on your Mac",
+      "imageKey": "OPENAI",
+      "link": "https://github.com/alanzchen/chatgpt-quick-actions",
+      "includeInCv": true,
+      "cvLabel": "ChatGPT Quick Actions",
+      "cvDescription": "a macOS utility to leverage ChatGPT in any applications.",
+      "cvLink": "https://zenan.ch/blog/gpt-on-mac"
+    },
+    {
+      "title": "Canvas Tools",
+      "time": "2022",
+      "description": "A set of CLI tools for Canvas LMS",
+      "imageKey": "CANVAS",
+      "link": "https://github.com/alanzchen/Canvas-Tools"
+    },
+    {
+      "title": "Jupyter Desktop",
+      "time": "2020",
+      "description": "macOS App for Jupyter Lab",
+      "imageKey": "JUPYTER",
+      "link": "https://github.com/alanzchen/jupyter-desktop"
+    },
+    {
+      "title": "Nosedive",
+      "time": "2017",
+      "description": "Parody website of Black Mirror's Nosedive",
+      "imageKey": "NOSEDIVE",
+      "link": "https://github.com/alanzchen/nosedive/"
+    }
+  ],
+  "ventures": [
+    {
+      "title": "IS Jobs",
+      "time": "2022 -",
+      "description": "Crowdsourced database for IS job posts",
+      "imageKey": "ISJOBS",
+      "link": "https://isjobs.xyz",
+      "includeInCv": true,
+      "cvDescription": "a crowdsourced database for Information Systems (IS) job posts.",
+      "cvLink": "https://isjobs.xyz/?from-cv=1"
+    },
+    {
+      "title": "MISQ Insider (as founding coordinator)",
+      "time": "2021 -",
+      "description": "MISQ-affiliated student blog for interviews",
+      "imageKey": "MISQ",
+      "link": "https://www.linkedin.com/company/misqinsider/"
+    },
+    {
+      "title": "Surge.fm",
+      "time": "2020 -",
+      "description": "Crowdsourced self-organizing news aggregator",
+      "imageKey": "SURGE",
+      "link": "https://surge.fm",
+      "includeInCv": true,
+      "cvDescription": "a crowdsourced self-organizing news aggregator & tracker.",
+      "cvLink": "https://surge.fm/"
+    },
+    {
+      "title": "浅见 (Qianjian)",
+      "time": "2014 - 18",
+      "description": "Online campus media for CUHK(SZ)",
+      "imageKey": "QIANJIAN",
+      "link": "https://qianjian.space"
+    },
+    {
+      "title": "月台 (Stay)",
+      "time": "2015 - 17",
+      "description": "Campus magazine for CUHK(SZ)",
+      "imageKey": "STAY",
+      "link": "https://archive.qianjian.space/stay/"
+    }
+  ]
+}
