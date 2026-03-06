@@ -15,8 +15,7 @@ const nextConfig = {
     return [
       {
         source: "/cv",
-        destination:
-          "https://github.com/alanzchen/homepage-next/releases/download/cv-latest/Zenan_Chen_CV.pdf",
+        destination: "https://go.zenan.ch/cv",
         permanent: false,
       },
     ];
