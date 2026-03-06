@@ -10,7 +10,6 @@ const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
 const cvDir = path.join(repoRoot, "cv");
 const cvPdfPath = path.join(cvDir, "main.pdf");
-const publicPdfPath = path.join(repoRoot, "public", "Zenan_Chen_CV.pdf");
 
 function run(command, args, cwd = repoRoot) {
   const result = spawnSync(command, args, {
@@ -48,9 +47,8 @@ function main() {
     throw new Error(`Expected compiled PDF at ${cvPdfPath}`);
   }
 
-  fs.copyFileSync(cvPdfPath, publicPdfPath);
   run("latexmk", ["-c"], cvDir);
-  console.log(`Copied ${cvPdfPath} -> ${publicPdfPath}`);
+  console.log(`Built ${cvPdfPath}`);
 }
 
 try {

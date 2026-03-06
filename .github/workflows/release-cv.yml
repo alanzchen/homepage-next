@@ -41,15 +41,15 @@ jobs:
           run: |
             cd cv
             latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex
-            cp main.pdf ../public/Zenan_Chen_CV.pdf
             latexmk -c
+            cp main.pdf Zenan_Chen_CV.pdf
 
       - name: Publish rolling CV release
         uses: ncipollo/release-action@v1
         with:
           tag: cv-latest
           name: Latest CV
-          artifacts: public/Zenan_Chen_CV.pdf
+          artifacts: cv/Zenan_Chen_CV.pdf
           allowUpdates: true
           replacesArtifacts: true
           removeArtifacts: true

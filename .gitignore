@@ -41,6 +41,11 @@ next-env.d.ts
 # Contentlayer
 .contentlayer
 
+# generated CV artifacts
+cv/generated/
+cv/main.pdf
+public/Zenan_Chen_CV.pdf
+
 .vscode/*
 !.vscode/launch.json
 .env
