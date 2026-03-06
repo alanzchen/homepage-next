@@ -171,24 +171,30 @@ function renderProfileSections(profile, publications) {
         : "forthcoming"
       : publication.journal;
     const journalSuffix = journalLabel ? `, \\emph{${escapeLatex(journalLabel)}}` : "";
+    const entryLines = [];
 
     if (publication.url) {
-      lines.push(`\\years{${escapeLatex(yearLabel)}}\\href{${publication.url}}{\\textbf{${escapedTitle}}}${journalSuffix}\\\\`);
+      entryLines.push(`\\years{${escapeLatex(yearLabel)}}\\href{${publication.url}}{\\textbf{${escapedTitle}}}${journalSuffix}`);
     } else {
-      lines.push(`\\years{${escapeLatex(yearLabel)}}\\textbf{${escapedTitle}}${journalSuffix}\\\\`);
+      entryLines.push(`\\years{${escapeLatex(yearLabel)}}\\textbf{${escapedTitle}}${journalSuffix}`);
     }
 
     if (publication.authors?.length) {
-      lines.push(`${escapeLatex(publication.authors.join(", "))}\\\\`);
+      entryLines.push(escapeLatex(publication.authors.join(", ")));
     }
 
     if (publication.awards?.length) {
       publication.awards.forEach((award) => {
-        lines.push(`\\ind \\award{${escapeLatex(award)}} \\\\`);
+        entryLines.push(`\\ind \\award{${escapeLatex(award)}}`);
       });
     }
 
-    lines.push("\\medskip");
+    entryLines.forEach((entryLine, index) => {
+      const suffix = index === entryLines.length - 1 ? "" : "\\\\";
+      lines.push(`${entryLine}${suffix}`);
+    });
+
+    lines.push("\\par\\medskip");
   });
 
   lines.push("%------------------------------------------------");
