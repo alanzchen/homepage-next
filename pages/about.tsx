@@ -10,7 +10,6 @@ import { ActivityType } from "components/Activity";
 import cuhkLogo from "public/schools/CUHK.png";
 import umnLogo from "public/schools/UMN.png";
 
-import githubLogo from "public/Github.png";
 import jupyterLogo from "public/projects/jupyter.png";
 import qianjianLogo from "public/ventures/qianjian.png";
 import stayLogo from "public/ventures/stay.jpeg";
@@ -22,151 +21,62 @@ import surgeLogo from "public/ventures/surge.svg";
 import misqLogo from "public/ventures/misq.png";
 
 import avatar from "public/avatar.png";
+import profileData from "shared/profile.json";
 
 import { GetStaticProps } from "next";
 import { Project, allProjects } from "../.contentlayer/generated";
 import { pick } from "lib/pick";
-import MDXComponents from "../components/MDXComponents";
-import { getActivities, getActivity } from "../lib/strava";
+import { getActivities } from "../lib/strava";
 
-export const connectLinks = [
-  { label: "Email", href: "mailto:contact@zenan.ch" },
-  { label: "Twitter", href: "https://twitter.com/chzenan" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/chzenan/" },
-  { label: "GitHub", href: "https://github.com/alanzchen" }
-];
+const schoolImageMap = {
+  UMN: umnLogo,
+  CUHK: cuhkLogo,
+} as const;
 
-export const FullName = "Zenan Chen";
-export const SiteURL = "https://zenan.ch";
+const projectImageMap = {
+  OPENAI: openaiLogo,
+  CANVAS: canvasLogo,
+  JUPYTER: jupyterLogo,
+  NOSEDIVE: nosediveLogo,
+  ISJOBS: isjobsLogo,
+  MISQ: misqLogo,
+  SURGE: surgeLogo,
+  QIANJIAN: qianjianLogo,
+  STAY: stayLogo,
+} as const;
 
-const education = [
-  {
-    title: "Ph.D. in Information Systems",
-    description: "University of Minnesota",
-    time: "2018 - 24",
-    imageSrc: umnLogo,
-  },
-  {
-    title: "B.A. in Economics",
-    description: "CUHK, Shenzhen",
-    time: "2014 - 18",
-    imageSrc: cuhkLogo,
-  },
-];
+export const connectLinks = profileData.contactLinks;
+export const FullName = profileData.identity.fullName;
+export const SiteURL = profileData.identity.siteUrl;
 
-const sideProjects = [
-  {
-    title: "ChatGPT Quick Actions for Raycast",
-    time: "2023",
-    description: "Invoke ChatGPT anywhere on your Mac",
-    imageSrc: openaiLogo,
-    link: "https://github.com/alanzchen/chatgpt-quick-actions",
-  },
-  {
-    title: "Canvas Tools",
-    time: "2022",
-    description: "A set of CLI tools for Canvas LMS",
-    imageSrc: canvasLogo,
-    link: "https://github.com/alanzchen/Canvas-Tools"
-  },
-  {
-    title: "Jupyter Desktop",
-    time: "2020",
-    description: "macOS App for Jupyter Lab",
-    imageSrc: jupyterLogo,
-    link: "https://github.com/alanzchen/jupyter-desktop",
-  },
-  {
-    title: "Nosedive",
-    time: "2017",
-    description: "Parody website of Black Mirror's Nosedive",
-    imageSrc: nosediveLogo,
-    link: "https://github.com/alanzchen/nosedive/",
-  }
-];
+const education = profileData.education.map((item) => ({
+  title: item.title,
+  description: item.description,
+  time: item.time,
+  imageSrc: schoolImageMap[item.imageKey as keyof typeof schoolImageMap],
+}));
 
-const ventures = [
-  {
-    title: "IS Jobs",
-    time: "2022 -",
-    description: "Crowdsourced database for IS job posts",
-    imageSrc: isjobsLogo,
-    link: "https://isjobs.xyz",
-  },
-  {
-    title: "MISQ Insider (as founding coordinator)",
-    time: "2021 -",
-    description: "MISQ-affiliated student blog for interviews",
-    imageSrc: misqLogo,
-    link: "https://www.linkedin.com/company/misqinsider/",
-  },
-  {
-    title: "Surge.fm",
-    time: "2020 -",
-    description: "Crowdsourced self-organizing news aggregator",
-    imageSrc: surgeLogo,
-    link: "https://surge.fm",
-  },
-  {
-    title: "浅见 (Qianjian)",
-    time: "2014 - 18",
-    description: "Online campus media for CUHK(SZ)",
-    imageSrc: qianjianLogo,
-    link: "https://qianjian.space",
-  },
-  {
-    title: "月台 (Stay)",
-    time: "2015 - 17",
-    description: "Campus magazine for CUHK(SZ)",
-    imageSrc: stayLogo,
-    link: "https://archive.qianjian.space/stay/",
-  }
-];
+const sideProjects = profileData.sideProjects.map((item) => ({
+  title: item.title,
+  time: item.time,
+  description: item.description,
+  imageSrc: projectImageMap[item.imageKey as keyof typeof projectImageMap],
+  link: item.link,
+}));
 
-const awards = [
-  {
-    title: "INFORMS ISS Nunamaker-Chen Dissertation Award",
-    description: "2nd Runner-up",
-    time: "2024",
-  },
-  {
-    title: "Best Dissertation Award @ WITS",
-    time: "2023",
-  },
-  {
-    title: "Best Completed Research Paper Runner-up @ WeB",
-    time: "2023",
-  },
-  {
-    title: "Best Student Paper Runner-up @ CIST",
-    time: "2023",
-  },
-  {
-    title: "Best Paper Award @ ICIS, General Track",
-    time: "2022",
-  },
-  {
-    title: "Best Student Paper Award @ WITS",
-    time: "2022",
-  },
-  {
-    title: "Carlson School of Management Dissertation Fellowship",
-    time: "2022",
-  },
-  {
-    title: "First Place @ China Bridge Case Competition ($6,000)",
-    description: "As Faculty Mentor, I coached a team of 4 undergraduate students.",
-    time: "2021",
-  },
-  {
-    title: "Dean’s Small Research Grant",
-    time: "2020",
-  },
-];
+const ventures = profileData.ventures.map((item) => ({
+  title: item.title,
+  time: item.time,
+  description: item.description,
+  imageSrc: projectImageMap[item.imageKey as keyof typeof projectImageMap],
+  link: item.link,
+}));
+
+const awards = profileData.awards.filter((award) => award.featuredOnWebsite);
 
 const seoTitle = `About | ${FullName}`;
 export const seoDesc =
-  "Assistant Professor in Information Systems. For a more humane & productive future.";
+  profileData.identity.seoDescription;
 
 export default function About({ projects, activities }: { projects: Project[]; activities: ActivityType[] }) {
   return (
@@ -243,7 +153,7 @@ export default function About({ projects, activities }: { projects: Project[]; a
             <div className="flex flex-col w-full gap-8">
               <ul className={`flex flex-col gap-1`}>
                 {awards.map((award) => (
-                  <li className="" key="award">
+                  <li className="" key={`${award.title}-${award.time}`}>
                     <div className="flex justify-between gap-2">
                       <div className="flex flex-col gap-px">
                         <p>{award.title}</p>
