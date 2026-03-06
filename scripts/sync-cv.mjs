@@ -171,12 +171,11 @@ function renderProfileSections(profile, publications) {
         : "forthcoming"
       : publication.journal;
     const journalSuffix = journalLabel ? `, \\emph{${escapeLatex(journalLabel)}}` : "";
-    const titleLineBreak = publication.authors?.length ? "\\\\[-0.2em]" : "\\\\";
 
     if (publication.url) {
-      lines.push(`\\years{${escapeLatex(yearLabel)}}\\href{${publication.url}}{\\textbf{${escapedTitle}}}${journalSuffix}${titleLineBreak}`);
+      lines.push(`\\years{${escapeLatex(yearLabel)}}\\href{${publication.url}}{\\textbf{${escapedTitle}}}${journalSuffix}\\\\`);
     } else {
-      lines.push(`\\years{${escapeLatex(yearLabel)}}\\textbf{${escapedTitle}}${journalSuffix}${titleLineBreak}`);
+      lines.push(`\\years{${escapeLatex(yearLabel)}}\\textbf{${escapedTitle}}${journalSuffix}\\\\`);
     }
 
     if (publication.authors?.length) {
