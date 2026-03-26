@@ -1,21 +1,21 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
-import { allProjects, Project as ProjectType } from ".contentlayer/generated";
+import { allResearchItems, ResearchItem } from ".contentlayer/generated";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { NextSeo, SiteLinksSearchBoxJsonLd } from "next-seo";
+import { NextSeo } from "next-seo";
 import MDXComponents from "components/MDXComponents";
 import { connectLinks, FullName, SiteURL } from "pages/about";
 import Link from "components/Link";
 import { ReactElement } from "react";
 import HitCounter from "components/hitcounter";
+import { getResearchItemBySlug } from "../../lib/research";
 
 type ProjectProps = {
-  project: ProjectType;
-  rest: ProjectType[];
+  project: ResearchItem;
 };
 
-export default function Project({ project, rest }: ProjectProps) {
-  const seoTitle = `${project.title} | ${FullName}`;
-  const seoDesc = `${project.description}`;
+export default function Project({ project }: ProjectProps) {
+  const seoTitle = `${project.working?.title} | ${FullName}`;
+  const seoDesc = `${project.working?.description}`;
   const url = `${SiteURL}/project/${project.slug}`;
   const Component = useMDXComponent(project.body.code);
 
@@ -40,13 +40,13 @@ export default function Project({ project, rest }: ProjectProps) {
         <article>
           <div className="h-20" />
           <div className="flex flex-col gap-3 px-4 md:px-6 py-2 max-w-[700px] mx-auto ">
-            <h1 className="text-2xl font-semibold">{project.title}</h1>
+            <h1 className="text-2xl font-semibold">{project.working?.title}</h1>
             <div className="flex gap-3">
-              <p className="text-secondary">{project.time}</p>
-              {project.url && (
+              <p className="text-secondary">{project.working?.time}</p>
+              {project.working?.url && (
                 <>
                   <span>&middot;</span>
-                  <Link href={project.url}>Read Paper ↗</Link>
+                  <Link href={project.working.url}>Read Paper ↗</Link>
                 </>
               )}
             </div>
@@ -83,22 +83,34 @@ export default function Project({ project, rest }: ProjectProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const paths = allResearchItems
+    .filter((item) => item.status === "working")
+    .map((item) => ({ params: { slug: item.slug } }));
+
   return {
-    paths: allProjects.map((p) => ({ params: { slug: p.slug } })),
+    paths,
     fallback: false,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const project = allProjects.find((p) => p.slug === params?.slug);
-  const rest = allProjects
-    /* remove current post */
-    .filter((p) => p.slug !== params?.slug);
+  const project = getResearchItemBySlug(allResearchItems, params?.slug);
+
+  if (!project) {
+    return {
+      notFound: true,
+    };
+  }
+
+  if (project.status !== "working" || project.slug !== params?.slug) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
       project,
-      rest,
     },
   };
 };

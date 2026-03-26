@@ -1,5 +1,6 @@
 import {
   defineDocumentType,
+  defineNestedType,
   makeSource,
   ComputedFields,
 } from "contentlayer/source-files"; // eslint-disable-line
@@ -32,57 +33,67 @@ export const Post = defineDocumentType(() => ({
   computedFields: postComputedFields,
 }));
 
-const projectComputedFields: ComputedFields = {
+const researchComputedFields: ComputedFields = {
   slug: {
     type: "string",
     resolve: (doc) => getSlug(doc),
   },
 };
 
-export const Project = defineDocumentType(() => ({
-  name: "Project",
-  filePathPattern: `project/**/*.mdx`,
-  contentType: "mdx",
+const WorkingResearch = defineNestedType(() => ({
+  name: "WorkingResearch",
   fields: {
     title: { type: "string", required: true },
     description: { type: "string", required: true },
     time: { type: "string", required: true },
     url: { type: "string", required: false },
-    awards: { type: "json", required: false },
   },
-  computedFields: projectComputedFields,
 }));
 
-const publicationComputedFields: ComputedFields = {
-  slug: {
-    type: "string",
-    resolve: (doc) => getSlug(doc),
+const MediaCoverage = defineNestedType(() => ({
+  name: "MediaCoverage",
+  fields: {
+    name: { type: "string", required: true },
+    url: { type: "string", required: true },
   },
-};
+}));
 
-export const Publication = defineDocumentType(() => ({
-  name: "Publication",
-  filePathPattern: `publication/**/*.mdx`,
-  contentType: "mdx",
+const PublicationResearch = defineNestedType(() => ({
+  name: "PublicationResearch",
   fields: {
     title: { type: "string", required: true },
     description: { type: "string", required: true },
     publishedAt: { type: "string", required: true },
     journal: { type: "string", required: true },
-    authors: { type: "json", required: true },
+    authors: { type: "list", of: { type: "string" }, required: true },
     url: { type: "string", required: false },
     forthcoming: { type: "boolean", required: false },
-    tags: { type: "json", required: false },
-    image: { type: "string", required: false },
-    awards: { type: "json", required: false },
-    media_coverage: { type: "json", required: false }
+    media_coverage: { type: "list", of: MediaCoverage, required: false },
+    abstract: { type: "string", required: false },
   },
-  computedFields: publicationComputedFields,
+}));
+
+export const ResearchItem = defineDocumentType(() => ({
+  name: "ResearchItem",
+  filePathPattern: `research/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    status: {
+      type: "enum",
+      options: ["working", "published"],
+      required: true,
+    },
+    legacySlugs: { type: "list", of: { type: "string" }, required: false },
+    awards: { type: "list", of: { type: "string" }, required: false },
+    working: { type: "nested", of: WorkingResearch, required: false },
+    publication: { type: "nested", of: PublicationResearch, required: false },
+  },
+  computedFields: researchComputedFields,
 }));
 
 export default makeSource({
   contentDirPath: "data",
-  documentTypes: [Post, Project, Publication],
+  documentTypes: [Post, ResearchItem],
   mdx: {
     rehypePlugins: [rehypePrism, rehypeKatex],
     remarkPlugins: [

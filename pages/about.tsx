@@ -24,8 +24,6 @@ import avatar from "public/avatar.png";
 import profileData from "shared/profile.json";
 
 import { GetStaticProps } from "next";
-import { Project, allProjects } from "../.contentlayer/generated";
-import { pick } from "lib/pick";
 import { getActivities } from "../lib/strava";
 
 const schoolImageMap = {
@@ -78,7 +76,7 @@ const seoTitle = `About | ${FullName}`;
 export const seoDesc =
   profileData.identity.seoDescription;
 
-export default function About({ projects, activities }: { projects: Project[]; activities: ActivityType[] }) {
+export default function About({ activities }: { activities: ActivityType[] }) {
   return (
     <>
       <NextSeo
@@ -185,13 +183,6 @@ export default function About({ projects, activities }: { projects: Project[]; a
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-
-  const projects = allProjects
-    .sort((a, b) => parseInt(b.time.slice(0, 4)) - parseInt(a.time.slice(0, 4)))
-    .map((post) =>
-    pick(post, ["slug", "title", "description", "time"])
-  );
-
   let activities: ActivityType[] = [];
   try {
     activities = await getActivities();
@@ -201,7 +192,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      projects: projects,
       activities: activities
     },
     revalidate: 3600,

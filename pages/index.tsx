@@ -1,5 +1,5 @@
 import { GetStaticProps } from "next";
-import { allPosts, allProjects, allPublications, Post, Project, Publication } from ".contentlayer/generated";
+import { allPosts, allResearchItems, Post, ResearchItem } from ".contentlayer/generated";
 import { pick } from "lib/pick";
 
 import Link from "components/Link";
@@ -13,6 +13,7 @@ import { TalkList } from "./talks";
 import Award from "../components/Award";
 import { talks } from "../data/talks";
 import { IconExternalLink } from "../components/Icons";
+import { getResearchItemSortYear } from "../lib/research";
 
 
 
@@ -27,8 +28,8 @@ const recentPastTalks = talks.filter((talk) => {
 
 type HomeProps = {
   posts: Post[];
-  projects: Project[];
-  publications: Publication[];
+  projects: ResearchItem[];
+  publications: ResearchItem[];
 };
 
 export default function Home({ posts, projects, publications }: HomeProps) {
@@ -108,12 +109,16 @@ export default function Home({ posts, projects, publications }: HomeProps) {
           <h2>Working projects</h2>
           <ul className="flex flex-col gap-8">
             {projects.map((project) => (
-              <li key={project.title} className="animate-in">
-                <Section heading={project.time}>
+              <li key={project.slug} className="animate-in">
+                <Section heading={project.working!.time}>
                   <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-1">
-                      <h3>{project.title}</h3>
-                      <p className="text-secondary">{project.description}</p>
+                      <h3>
+                        <Link href={`/project/${project.slug}`} underline>
+                          {project.working?.title}
+                        </Link>
+                      </h3>
+                      <p className="text-secondary">{project.working?.description}</p>
                       {project.awards && 
                         project.awards.map((award: string) => (
                           <p key={award} className="text-secondary">
@@ -121,9 +126,6 @@ export default function Home({ posts, projects, publications }: HomeProps) {
                           </p>
                         ))
                       }
-                      <Link href={`/project/${project.slug}`} underline>
-                        Read More
-                      </Link>
                     </div>
                     {/* <Link href={`/project/${project.slug}`}>
                       {project.slug === "tracklib" && <TracklibGraphic />}
@@ -143,21 +145,21 @@ export default function Home({ posts, projects, publications }: HomeProps) {
           <h2>Recent publications</h2>
           <ul className="flex flex-col gap-8">
             {publications.map((publication) => (
-              <li key={publication.title} className="animate-in">
-                <Section heading={publication.publishedAt}>
+              <li key={publication.slug} className="animate-in">
+                <Section heading={publication.publication!.publishedAt}>
                   <div className="flex flex-col gap-5">
                     <div className="flex flex-col gap-1">
                       <h3><Link href={`/publication/${publication.slug}`} underline>
-                          {publication.title}
+                          {publication.publication?.title}
                         </Link></h3>
-                      <p className="text-secondary">{publication.description}</p>
-                      {publication.url ? (
-                        <Link href={publication.url} underline>
-                          <span className="inline-flex items-center underline"><i>{publication.journal}</i> <IconExternalLink className="w-4 h-4 ml-1" /></span>
+                      <p className="text-secondary">{publication.publication?.description}</p>
+                      {publication.publication?.url ? (
+                        <Link href={publication.publication.url} underline>
+                          <span className="inline-flex items-center underline"><i>{publication.publication.journal}</i> <IconExternalLink className="w-4 h-4 ml-1" /></span>
                         </Link>
                       ) :
                       (
-                        <p className="text-primary"><i>{publication.journal}</i>{ publication.forthcoming && ", Forthcoming"}</p>
+                        <p className="text-primary"><i>{publication.publication?.journal}</i>{ publication.publication?.forthcoming && ", Forthcoming"}</p>
                       )
                       }
                       {publication.awards && 
@@ -168,19 +170,18 @@ export default function Home({ posts, projects, publications }: HomeProps) {
                         ))
                       }
                       <span>
-                        {publication.media_coverage && "Media coverage: "}
-                        {publication.media_coverage && publication.media_coverage.map((media: { name: string, url: string }) => (
-                          <>
+                        {publication.publication?.media_coverage && "Media coverage: "}
+                        {publication.publication?.media_coverage && publication.publication.media_coverage.map((media) => (
+                          <span key={`${publication.slug}-${media.name}`}>
                             <Link href={media.url} underline className="ml-2">
                               <span className="inline-flex items-center underline">
                                 {media.name}
                                 <IconExternalLink className="w-4 h-4 ml-1" />
                               </span>
                             </Link>
-                          </>
+                          </span>
                         ))}
                       </span>
-                      
                     </div>
                     {/* <Link href={`/project/${project.slug}`}>
                       {project.slug === "tracklib" && <TracklibGraphic />}
@@ -217,19 +218,25 @@ export const getStaticProps: GetStaticProps = async () => {
     .filter((_, i) => i < 4)
     .map((post) => pick(post, ["slug", "title", "publishedAt", "image"]))
   
-  const projects = allProjects
-    .sort((a, b) => parseInt(b.time.slice(0, 4)) - parseInt(a.time.slice(0, 4)))
-    .map((post) =>
-    pick(post, ["slug", "title", "description", "time", "awards"])
-  );
-
-  const publications = allPublications
+  const projects = allResearchItems
+    .filter((item) => item.status === "working" && item.working)
     .sort(
       (a, b) =>
-        new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-    ).map((publication) => {
-      return pick(publication, ["slug", "title", "description", "publishedAt", "journal", "awards", "media_coverage", "url", "forthcoming"])
-    });
+        getResearchItemSortYear(b.working!.time) -
+        getResearchItemSortYear(a.working!.time)
+    )
+    .map((item) => pick(item, ["slug", "status", "working", "awards"]));
+
+  const publications = allResearchItems
+    .filter((item) => item.status === "published" && item.publication)
+    .sort(
+      (a, b) =>
+        getResearchItemSortYear(b.publication!.publishedAt) -
+        getResearchItemSortYear(a.publication!.publishedAt)
+    )
+    .map((item) =>
+      pick(item, ["slug", "status", "publication", "awards"])
+    );
 
   return {
     props: { posts, projects, publications },
