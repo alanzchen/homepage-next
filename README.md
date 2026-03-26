@@ -17,7 +17,7 @@ Shared profile/talk metadata lives in:
 
 - `shared/profile.json`
 - `shared/talks.json`
-- `data/publication/*.mdx` frontmatter
+- `data/research/*.mdx` published-item frontmatter
 
 Commands:
 

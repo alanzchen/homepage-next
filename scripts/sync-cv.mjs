@@ -41,6 +41,18 @@ function normalizeTitle(value) {
     .trim();
 }
 
+async function listMdxFiles(dirPath) {
+  try {
+    const allFiles = await fs.readdir(dirPath);
+    return allFiles.filter((file) => file.endsWith(".mdx"));
+  } catch (error) {
+    if (error && typeof error === "object" && "code" in error && error.code === "ENOENT") {
+      return [];
+    }
+    throw error;
+  }
+}
+
 function writeTex(fileName, lines) {
   const content = [
     "% ----------------------------------------------------------------",
@@ -157,7 +169,7 @@ function renderProfileSections(profile, publications) {
 
   lines.push("\\section*{Publications}");
   if (publications.length === 0) {
-    lines.push("\\textit{No publications found in data/publication.}");
+    lines.push("\\textit{No publications found in data/research.}");
   }
 
   const currentYear = String(new Date().getFullYear());
@@ -373,12 +385,48 @@ function renderSideProjects(profile) {
 }
 
 async function loadPublications() {
-  const publicationDir = path.join(repoRoot, "data", "publication");
-  const allFiles = await fs.readdir(publicationDir);
-  const mdxFiles = allFiles.filter((file) => file.endsWith(".mdx"));
+  const researchDir = path.join(repoRoot, "data", "research");
+  const legacyPublicationDir = path.join(repoRoot, "data", "publication");
+  const researchFiles = await listMdxFiles(researchDir);
+  const legacyFiles = await listMdxFiles(legacyPublicationDir);
 
-  const publications = await Promise.all(mdxFiles.map(async (fileName) => {
-    const absolutePath = path.join(publicationDir, fileName);
+  if (researchFiles.length > 0) {
+    const publications = await Promise.all(researchFiles.map(async (fileName) => {
+      const absolutePath = path.join(researchDir, fileName);
+      const fileContents = await fs.readFile(absolutePath, "utf8");
+      const { data } = matter(fileContents);
+      const publication = data.publication || {};
+
+      if (data.status !== "published" || !publication.title) {
+        return null;
+      }
+
+      return {
+        title: publication.title || "",
+        publishedAt: String(publication.publishedAt || ""),
+        description: publication.description || "",
+        authors: Array.isArray(publication.authors) ? publication.authors : [],
+        url: publication.url || "",
+        awards: Array.isArray(data.awards) ? data.awards : [],
+        forthcoming: Boolean(publication.forthcoming),
+        journal: publication.journal || "",
+        media_coverage: Array.isArray(publication.media_coverage)
+          ? publication.media_coverage
+          : [],
+      };
+    }));
+
+    return publications
+      .filter(Boolean)
+      .sort((a, b) => {
+        const aYear = Number(a.publishedAt) || 0;
+        const bYear = Number(b.publishedAt) || 0;
+        return bYear - aYear;
+      });
+  }
+
+  const publications = await Promise.all(legacyFiles.map(async (fileName) => {
+    const absolutePath = path.join(legacyPublicationDir, fileName);
     const fileContents = await fs.readFile(absolutePath, "utf8");
     const { data } = matter(fileContents);
 
@@ -395,13 +443,11 @@ async function loadPublications() {
     };
   }));
 
-  publications.sort((a, b) => {
+  return publications.sort((a, b) => {
     const aYear = Number(a.publishedAt) || 0;
     const bYear = Number(b.publishedAt) || 0;
     return bYear - aYear;
   });
-
-  return publications;
 }
 
 async function main() {
