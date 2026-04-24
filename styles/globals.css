@@ -42,8 +42,23 @@ html {
     --headerBackground: rgb(21 21 20 / 80%);
   }
 
+  .sun-theme {
+    --sand1: #efe8dc;
+    --sand3: #e7dcc8;
+    --sand4: #ddcfb1;
+    --sand6: #cdbb97;
+    --sand11: #7f6b56;
+    --sand12: #342a20;
+    --sandA4: rgb(146 119 79 / 14%);
+    --bg: var(--sand1);
+    --boxBg: var(--sand4);
+    --blurBackground: rgb(239 232 220 / 92%);
+    --headerBackground: rgb(239 232 220 / 78%);
+  }
+
   .main-header {
     -webkit-tap-highlight-color: transparent;
+    transition: background-color 500ms ease;
   }
 
   .arc-theme {
@@ -61,6 +76,133 @@ html {
   body {
     overflow-x: hidden;
     background-color: var(--bg);
+  }
+}
+
+.theme-shell {
+  min-height: 100vh;
+  isolation: isolate;
+  transition: background-color 500ms ease, color 500ms ease;
+}
+
+.sun-mode-effect {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  background: var(--sand1);
+}
+
+.sun-theme .sun-mode-effect {
+  opacity: 1;
+}
+
+.sun-mode-effect__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sun-mode-effect__beam,
+.sun-mode-effect__glow {
+  display: none;
+}
+
+.sun-mode-effect__light-layer {
+  fill: rgb(255 250 241 / 92%);
+  mix-blend-mode: screen;
+  transform-origin: center;
+}
+
+.sun-mode-effect__light-layer--back {
+  opacity: 0.92;
+  animation: sun-dapple-glide-a 18s ease-in-out infinite alternate;
+}
+
+.sun-mode-effect__light-layer--front {
+  opacity: 0.98;
+  animation: sun-dapple-glide-b 14s ease-in-out infinite alternate;
+}
+
+.sun-mode-effect__shadow-layer {
+  fill: rgb(84 95 101 / 88%);
+  mix-blend-mode: multiply;
+  transform-origin: center;
+}
+
+.sun-mode-effect__shadow-layer--soft {
+  opacity: 0.84;
+  animation: sun-shadow-sway-a 20s ease-in-out infinite alternate;
+}
+
+.sun-mode-effect__branch-layer {
+  fill: none;
+  stroke: rgb(88 98 104 / 94%);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  mix-blend-mode: multiply;
+  transform-origin: center;
+}
+
+.sun-mode-effect__branch-layer--main {
+  stroke-width: 118;
+  opacity: 0.94;
+  animation: sun-shadow-sway-b 16s ease-in-out infinite alternate;
+}
+
+.sun-mode-effect__noise {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 24%, rgb(255 255 255 / 8%), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgb(255 255 255 / 6%), transparent 24%),
+    radial-gradient(circle, rgb(0 0 0 / 0.04) 0.7px, transparent 0.8px);
+  background-size: auto, auto, 4px 4px;
+  opacity: 0.45;
+  mix-blend-mode: multiply;
+}
+
+@keyframes sun-shadow-sway-a {
+  0% {
+    transform: translate3d(-2%, -1%, 0) rotate(-1.2deg) scale(1);
+  }
+
+  100% {
+    transform: translate3d(2.5%, 1.8%, 0) rotate(1.15deg) scale(1.03);
+  }
+}
+
+@keyframes sun-shadow-sway-b {
+  0% {
+    transform: translate3d(1.5%, -1.5%, 0) rotate(0.8deg) scale(1.02);
+  }
+
+  100% {
+    transform: translate3d(-2%, 1.2%, 0) rotate(-0.9deg) scale(1);
+  }
+}
+
+@keyframes sun-dapple-glide-a {
+  0% {
+    transform: translate3d(-1%, -1%, 0) rotate(-0.7deg);
+  }
+
+  100% {
+    transform: translate3d(2%, 1.5%, 0) rotate(0.8deg);
+  }
+}
+
+@keyframes sun-dapple-glide-b {
+  0% {
+    transform: translate3d(2%, 1.2%, 0) rotate(0.6deg);
+  }
+
+  100% {
+    transform: translate3d(-1.8%, -1.3%, 0) rotate(-0.7deg);
   }
 }
 

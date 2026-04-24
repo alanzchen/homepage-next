@@ -13,6 +13,7 @@ import * as gtag from "lib/gtag";
 import "../styles/globals.css";
 import Header from "components/header";
 import { NextPage } from "next";
+import SunModeEffect from "components/SunModeEffect";
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -51,10 +52,12 @@ export default function MyApp({
   return (
     <ThemeProvider
       attribute="class"
+      themes={["system", "light", "dark", "arc", "sun"]}
       value={{
         light: "light-theme",
         dark: "dark-theme",
         arc: "arc-theme",
+        sun: "sun-theme",
       }}
     >
       <style jsx global>{`
@@ -66,9 +69,12 @@ export default function MyApp({
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <div className="antialiased font-medium bg-primary text-primary width-full">
-        <Header />
-        {getLayout(<Component {...pageProps} />)}
+      <div className="theme-shell antialiased font-medium bg-primary text-primary width-full">
+        <SunModeEffect />
+        <div className="relative z-10">
+          <Header />
+          {getLayout(<Component {...pageProps} />)}
+        </div>
       </div>
       <Analytics />
       <SpeedInsights />

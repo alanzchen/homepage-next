@@ -13,13 +13,14 @@ export default function BitrefillGraphic() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [70, 0]);
   const { resolvedTheme } = useTheme();
+  const isBrightTheme = resolvedTheme === "light" || resolvedTheme === "sun";
 
   return (
     <div
       className="h-[283px] bg-[#001413] rounded-xl relative overflow-hidden"
       ref={ref}
     >
-      <Halo strength={resolvedTheme === "light" ? 10 : 4}>
+      <Halo strength={isBrightTheme ? 10 : 4}>
         <motion.div
           className="w-[257px] absolute right-4 z-10 -bottom-10"
           style={{ y }}

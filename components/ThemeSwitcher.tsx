@@ -10,6 +10,7 @@ const themes = [
   { id: "system", label: "Automatic" },
   { id: "light", label: "Light" },
   { id: "dark", label: "Dark" },
+  { id: "sun", label: "Sun" },
   { id: "arc", label: "Arc" },
 ];
 

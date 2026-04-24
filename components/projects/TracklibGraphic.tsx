@@ -13,13 +13,14 @@ export default function TracklibGraphic() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [70, 0]);
   const { resolvedTheme } = useTheme();
+  const isBrightTheme = resolvedTheme === "light" || resolvedTheme === "sun";
 
   return (
     <div
       className="relative overflow-hidden bg-black h-[283px] rounded-xl"
       ref={ref}
     >
-      <Halo strength={resolvedTheme === "light" ? 15 : 8}>
+      <Halo strength={isBrightTheme ? 15 : 8}>
         <motion.div
           className="w-[350px] absolute -right-20 z-10 bottom-0"
           style={{ y }}
