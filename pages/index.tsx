@@ -15,7 +15,34 @@ import { talks } from "../data/talks";
 import { IconExternalLink } from "../components/Icons";
 import { getResearchItemSortYear } from "../lib/research";
 
+const ownAuthorNames = new Set([FullName, `Zenan "Alan" Chen`, "Zenan Alan Chen"]);
+const lighterHoverLinkClass = "transition-colors hover:text-secondary";
 
+function formatNameList(names: string[]) {
+  if (names.length === 0) {
+    return "";
+  }
+
+  if (names.length === 1) {
+    return names[0];
+  }
+
+  if (names.length === 2) {
+    return `${names[0]} and ${names[1]}`;
+  }
+
+  return `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+}
+
+function formatCoauthorLine(authors?: string[]) {
+  const coauthors = authors?.filter((author) => !ownAuthorNames.has(author)) ?? [];
+
+  if (coauthors.length === 0) {
+    return null;
+  }
+
+  return `with ${formatNameList(coauthors)}`;
+}
 
 const now = new Date();
 const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
@@ -49,7 +76,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
             I study design and use of technologies to fully harness their benefits.
             <br />
             <br />
-            <Link href="/cv" >CV</Link>
+            <Link href="/cv" underline>CV</Link>
           </p>
         </div>
         <div className="right-0 -mt-20 overflow-hidden hidden md:block">
@@ -108,34 +135,41 @@ export default function Home({ posts, projects, publications }: HomeProps) {
         >
           <h2>Working projects</h2>
           <ul className="flex flex-col gap-8">
-            {projects.map((project) => (
-              <li key={project.slug} className="animate-in">
-                <Section heading={project.working!.time}>
-                  <div className="flex flex-col gap-5">
-                    <div className="flex flex-col gap-1">
-                      <h3>
-                        <Link href={`/project/${project.slug}`} underline>
-                          {project.working?.title}
-                        </Link>
-                      </h3>
-                      <p className="text-secondary">{project.working?.description}</p>
-                      {project.awards && 
-                        project.awards.map((award: string) => (
-                          <p key={award} className="text-secondary">
-                            <Award award={award} />
-                          </p>
-                        ))
-                      }
+            {projects.map((project) => {
+              const coauthorLine = formatCoauthorLine(project.working?.authors);
+
+              return (
+                <li key={project.slug} className="animate-in">
+                  <Section heading={project.working!.time}>
+                    <div className="flex flex-col gap-5">
+                      <div className="flex flex-col gap-1">
+                        <h3>
+                          <Link href={`/project/${project.slug}`} underline className={lighterHoverLinkClass}>
+                            {project.working?.title}
+                          </Link>
+                        </h3>
+                        <p className="text-secondary">{project.working?.description}</p>
+                        {coauthorLine && (
+                          <p className="text-secondary italic">{coauthorLine}</p>
+                        )}
+                        {project.awards &&
+                          project.awards.map((award: string) => (
+                            <p key={award} className="text-secondary">
+                              <Award award={award} />
+                            </p>
+                          ))
+                        }
+                      </div>
+                      {/* <Link href={`/project/${project.slug}`}>
+                        {project.slug === "tracklib" && <TracklibGraphic />}
+                        {project.slug === "bitrefill" && <BitrefillGraphic />}
+                        {project.slug === "trailroutes" && <TrailRoutesGraphic />}
+                      </Link> */}
                     </div>
-                    {/* <Link href={`/project/${project.slug}`}>
-                      {project.slug === "tracklib" && <TracklibGraphic />}
-                      {project.slug === "bitrefill" && <BitrefillGraphic />}
-                      {project.slug === "trailroutes" && <TrailRoutesGraphic />}
-                    </Link> */}
-                  </div>
-                </Section>
-              </li>
-            ))}
+                  </Section>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div
@@ -144,54 +178,61 @@ export default function Home({ posts, projects, publications }: HomeProps) {
         >
           <h2>Recent publications</h2>
           <ul className="flex flex-col gap-8">
-            {publications.map((publication) => (
-              <li key={publication.slug} className="animate-in">
-                <Section heading={publication.publication!.publishedAt}>
-                  <div className="flex flex-col gap-5">
-                    <div className="flex flex-col gap-1">
-                      <h3><Link href={`/publication/${publication.slug}`} underline>
-                          {publication.publication?.title}
-                        </Link></h3>
-                      <p className="text-secondary">{publication.publication?.description}</p>
-                      {publication.publication?.url ? (
-                        <Link href={publication.publication.url} underline>
-                          <span className="inline-flex items-center underline"><i>{publication.publication.journal}</i> <IconExternalLink className="w-4 h-4 ml-1" /></span>
-                        </Link>
-                      ) :
-                      (
-                        <p className="text-primary"><i>{publication.publication?.journal}</i>{ publication.publication?.forthcoming && ", Forthcoming"}</p>
-                      )
-                      }
-                      {publication.awards && 
-                        publication.awards.map((award: string) => (
-                          <p key={award} className="text-secondary">
-                            <Award award={award} />
-                          </p>
-                        ))
-                      }
-                      <span>
-                        {publication.publication?.media_coverage && "Media coverage: "}
-                        {publication.publication?.media_coverage && publication.publication.media_coverage.map((media) => (
-                          <span key={`${publication.slug}-${media.name}`}>
-                            <Link href={media.url} underline className="ml-2">
-                              <span className="inline-flex items-center underline">
-                                {media.name}
-                                <IconExternalLink className="w-4 h-4 ml-1" />
-                              </span>
-                            </Link>
-                          </span>
-                        ))}
-                      </span>
+            {publications.map((publication) => {
+              const coauthorLine = formatCoauthorLine(publication.publication?.authors);
+
+              return (
+                <li key={publication.slug} className="animate-in">
+                  <Section heading={publication.publication!.publishedAt}>
+                    <div className="flex flex-col gap-5">
+                      <div className="flex flex-col gap-1">
+                        <h3><Link href={`/publication/${publication.slug}`} underline className={lighterHoverLinkClass}>
+                            {publication.publication?.title}
+                          </Link></h3>
+                        <p className="text-secondary">{publication.publication?.description}</p>
+                        {coauthorLine && (
+                          <p className="text-secondary italic">{coauthorLine}</p>
+                        )}
+                        {publication.publication?.url ? (
+                          <Link href={publication.publication.url} underline className={lighterHoverLinkClass}>
+                            <span className="inline-flex items-center underline"><i>{publication.publication.journal}</i> <IconExternalLink className="w-4 h-4 ml-1" /></span>
+                          </Link>
+                        ) :
+                        (
+                          <p className="text-primary"><i>{publication.publication?.journal}</i>{ publication.publication?.forthcoming && ", Forthcoming"}</p>
+                        )
+                        }
+                        {publication.awards &&
+                          publication.awards.map((award: string) => (
+                            <p key={award} className="text-secondary">
+                              <Award award={award} />
+                            </p>
+                          ))
+                        }
+                        <span>
+                          {publication.publication?.media_coverage && "Media coverage: "}
+                          {publication.publication?.media_coverage && publication.publication.media_coverage.map((media) => (
+                            <span key={`${publication.slug}-${media.name}`}>
+                              <Link href={media.url} underline className="ml-2">
+                                <span className="inline-flex items-center underline">
+                                  {media.name}
+                                  <IconExternalLink className="w-4 h-4 ml-1" />
+                                </span>
+                              </Link>
+                            </span>
+                          ))}
+                        </span>
+                      </div>
+                      {/* <Link href={`/project/${project.slug}`}>
+                        {project.slug === "tracklib" && <TracklibGraphic />}
+                        {project.slug === "bitrefill" && <BitrefillGraphic />}
+                        {project.slug === "trailroutes" && <TrailRoutesGraphic />}
+                      </Link> */}
                     </div>
-                    {/* <Link href={`/project/${project.slug}`}>
-                      {project.slug === "tracklib" && <TracklibGraphic />}
-                      {project.slug === "bitrefill" && <BitrefillGraphic />}
-                      {project.slug === "trailroutes" && <TrailRoutesGraphic />}
-                    </Link> */}
-                  </div>
-                </Section>
-              </li>
-            ))}
+                  </Section>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <div

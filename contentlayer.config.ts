@@ -46,6 +46,7 @@ const WorkingResearch = defineNestedType(() => ({
     title: { type: "string", required: true },
     description: { type: "string", required: true },
     time: { type: "string", required: true },
+    authors: { type: "list", of: { type: "string" }, required: false },
     url: { type: "string", required: false },
   },
 }));

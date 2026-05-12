@@ -13,7 +13,7 @@ export default function TracklibGraphic() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [70, 0]);
   const { resolvedTheme } = useTheme();
-  const isBrightTheme = resolvedTheme === "light" || resolvedTheme === "sun";
+  const isBrightTheme = resolvedTheme === "light";
 
   return (
     <div
