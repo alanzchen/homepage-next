@@ -1,5 +1,5 @@
-import faunadb from "faunadb";
 import { NextApiRequest, NextApiResponse } from "next";
+import { getPostStatsKey, getRedis } from "lib/redis";
 
 type Data = {
   message?: string;
@@ -10,39 +10,29 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const q = faunadb.query;
-  const client = new faunadb.Client({
-    secret: process.env.FAUNA_SECRET_KEY || "",
-  });
-  const { slug } = req.query;
-  if (!slug) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", ["POST"]);
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
+  const slug = Array.isArray(req.query.slug) ? undefined : req.query.slug;
+  if (!slug || !/^[a-z0-9][a-z0-9-]*$/i.test(slug)) {
     return res.status(400).json({
-      message: "Article slug not provided",
+      message: "Valid content slug not provided",
     });
   }
-  // Check and see if the doc exists.
-  const doesDocExist = await client.query(
-    q.Exists(q.Match(q.Index("hits_by_slug"), slug))
-  );
-  if (!doesDocExist) {
-    await client.query(
-      q.Create(q.Collection("hits"), {
-        data: { slug, hits: 0 },
-      })
+
+  res.setHeader("Cache-Control", "private, no-store");
+
+  try {
+    const hits = await getRedis().hincrby(
+      getPostStatsKey(slug),
+      "views",
+      1
     );
+    return res.status(200).json({ hits });
+  } catch (error) {
+    console.error("Failed to register content view", { slug, error });
+    return res.status(500).json({ message: "Unable to register view" });
   }
-  // Fetch the document for-real
-  const document = (await client.query(
-    q.Get(q.Match(q.Index("hits_by_slug"), slug))
-  )) as { ref: string; data: { hits: number } };
-  await client.query(
-    q.Update(document.ref, {
-      data: {
-        hits: document.data.hits + 1,
-      },
-    })
-  );
-  return res.status(200).json({
-    hits: document.data.hits,
-  });
 }

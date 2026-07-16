@@ -30,9 +30,11 @@ This repository hosts `zenan.ch`, a personal website/portfolio/blog built with N
 
 ### API and Data
 - API routes are under `pages/api/*`.
-- Persistent counters/statistics use FaunaDB.
-- Required environment variable: `FAUNA_SECRET_KEY`.
-- Webmentions are fetched from webmention.io and combined with local stats.
+- Persistent counters/statistics use Upstash Redis.
+- Redis credentials may use the existing Vercel names (`KV_REST_API_URL` and `KV_REST_API_TOKEN`) or the native Upstash names (`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`). A read-only token cannot seed or increment counters.
+- The Redis `likes` field is the displayed total. Do not add webmentions to it: the migration baselines recovered from the Wayback Machine already include historical webmentions.
+- The production build runs the idempotent Redis seed when credentials are available. `yarn redis:seed` can also run it manually and will not overwrite an existing likes field.
+- No historical view-count snapshots were recovered, so view counters start at zero.
 
 ### Styling and Theme
 - Tailwind CSS with Radix color variables.
@@ -109,4 +111,4 @@ Implemented in `scripts/sync-cv.mjs`:
 Canonical URL is referenced in multiple places and should stay consistent:
 - `pages/about.tsx` (`SiteURL`)
 - SEO/OpenGraph usage across pages
-- Sitemap and webmention-related logic
+- Sitemap-related logic

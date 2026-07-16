@@ -1,58 +1,47 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import faunadb from "faunadb";
 import { pick } from "lib/pick";
-import { getMentionsForSlug } from "lib/webmentions";
+import { getPostStatsKey, getRedis, PostStats } from "lib/redis";
 import { allPosts } from ".contentlayer/generated";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const q = faunadb.query;
-  const client = new faunadb.Client({
-    secret: process.env.FAUNA_SECRET_KEY || "",
-  });
+  if (req.method !== "GET") {
+    res.setHeader("Allow", ["GET"]);
+    return res.status(405).json({ message: "Method not allowed" });
+  }
 
   const posts = allPosts.map((post) =>
     pick(post, ["slug", "title", "publishedAt", "image", "tags", "summary"])
   );
-  const postsWithLikes = await Promise.all(
-    posts
-      .sort(
-        (a, b) =>
-          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-      )
-      .map(async (post) => {
-        // Fetch webmentions
-        const numberOfmentions = await getMentionsForSlug(post.slug);
+  try {
+    const redis = getRedis();
+    const postsWithLikes = await Promise.all(
+      posts
+        .sort(
+          (a, b) =>
+            new Date(b.publishedAt).getTime() -
+            new Date(a.publishedAt).getTime()
+        )
+        .map(async (post) => {
+          const stats = await redis.hgetall<PostStats>(
+            getPostStatsKey(post.slug)
+          );
 
-        // Fetch fauna likes
-        type documentType = { ref: string; data: { likes: number } };
-        const likesDocument = (await client.query(
-          q.Get(q.Match(q.Index("likes_by_slug"), post.slug))
-        )) as documentType;
-        const totalLikes =
-          numberOfmentions > 0
-            ? likesDocument.data.likes + numberOfmentions
-            : likesDocument.data.likes;
+          return {
+            ...post,
+            id: post.slug,
+            likes: stats?.likes ?? 0,
+            views: stats?.views ?? 0,
+          };
+        })
+    );
 
-        // Fetch fauna hits
-        const hitsDocument = (await client.query(
-          q.Get(q.Match(q.Index("hits_by_slug"), post.slug))
-        )) as {
-          ref: string;
-          data: { hits: number };
-        };
-
-        return {
-          ...post,
-          id: post.slug,
-          likes: totalLikes,
-          views: hitsDocument.data.hits,
-        };
-      })
-  );
-
-  res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate");
-  res.status(200).json({ posts: postsWithLikes });
+    res.setHeader("Cache-Control", "s-maxage=60, stale-while-revalidate");
+    return res.status(200).json({ posts: postsWithLikes });
+  } catch (error) {
+    console.error("Failed to load post stats", { error });
+    return res.status(500).json({ message: "Unable to load post stats" });
+  }
 }
