@@ -21,6 +21,12 @@ type PostProps = {
   related: PostType[];
 };
 
+const BlogMDXComponents = {
+  ...MDXComponents,
+  h1: (props: React.ComponentPropsWithoutRef<"h2">) => <h2 {...props} />,
+  h2: (props: React.ComponentPropsWithoutRef<"h3">) => <h3 {...props} />,
+};
+
 export default function Post({ post, related }: PostProps) {
   const seoTitle = `${post.title} | ${FullName}`;
   const seoDesc = `${post.summary}`;
@@ -69,8 +75,10 @@ export default function Post({ post, related }: PostProps) {
           )}
           <div className="h-8" />
           <div className="flex flex-col gap-3">
-            <h1 className="text-2xl font-semibold">{post.title}</h1>
-            <p className="text-secondary">
+            <h1 className="text-[28px] leading-[34px] md:text-3xl md:leading-9 font-semibold tracking-[-0.02em]">
+              {post.title}
+            </h1>
+            <p className="text-sm leading-[22px] font-normal text-secondary">
               <time dateTime={post.publishedAt}>
                 {formatDate(post.publishedAt)}
               </time>
@@ -78,9 +86,9 @@ export default function Post({ post, related }: PostProps) {
               <HitCounter slug={post.slug} />
             </p>
           </div>
-          <div className="h-8" />
-          <div className="prose prose-h2:text-lg prose-h2:mb-2 prose-h2:font-semibold">
-            <Component components={MDXComponents} />
+          <div className="h-10" />
+          <div className="blog-prose prose font-normal text-base leading-[27px] md:text-[17px] md:leading-[29px] prose-p:my-6 [&>p:first-child]:mt-0 prose-headings:tracking-[-0.02em] prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-2xl prose-h2:leading-8 prose-h2:font-semibold prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-xl prose-h3:leading-7 prose-h3:font-semibold prose-strong:font-semibold prose-a:font-medium">
+            <Component components={BlogMDXComponents} />
           </div>
         </article>
 

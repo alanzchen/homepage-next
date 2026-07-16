@@ -1,0 +1,105 @@
+---
+title: 'Announcing ISJobs 2.0 (Beta)'
+publishedAt: '2026-07-15'
+summary: 'ISJobs has grown from an Airtable embed into a searchable job database, private application tracker, and native interface for AI agents.'
+image: '/blog/isjobs-2-beta/cover.png'
+tags: ["IS Job Market", "Academia", "Information Systems", "AI", "MCP"]
+---
+
+Over the past few years, I have received many personal messages from job-market candidates thanking me for creating [ISJobs](https://isjobs.xyz). They told me that it helped them discover opportunities they might otherwise have missed, saved them a tremendous amount of time, and made an already stressful process a little easier to navigate.
+
+Those messages have meant a lot to me.
+
+When I first built ISJobs, I was not trying to create a sophisticated product. I saw a simple problem: Information Systems job postings were scattered across university websites, mailing lists, social media, and personal networks. Candidates were repeatedly doing the same work to find and organize them. A shared database seemed like an obvious way for our community to help one another.
+
+The first version was therefore intentionally simple: a static website with a public Airtable embedded in it. It was not glamorous, but it worked. More importantly, people used it. Community maintainers and contributors kept the list current, and job-market candidates began to rely on it.
+
+But the more useful ISJobs became, the more its limitations became apparent. An embedded spreadsheet is still a spreadsheet. Searching was limited. Following the market across different seasons was awkward. Candidates still had to copy listings into their own spreadsheets to track applications. Contributors still had to perform a lot of repetitive data entry by hand.
+
+The messages I received made me feel a responsibility to build something more durable. ISJobs had become more than a side project, and it deserved a better home.
+
+Today, I am excited to announce that **[ISJobs 2.0](https://isjobs.xyz) is available in beta**.
+
+# From an embedded spreadsheet to a real application
+
+ISJobs 2.0 is a complete rebuild. The public Airtable has been replaced by a dedicated, Postgres-backed application that is faster, easier to search, and designed around how candidates actually experience the academic job market.
+
+You can now search by position, university, or department and filter openings by job type and region. Jobs are organized into market seasons, so the current list remains focused while past seasons remain available as a useful archive. If you create an account, you can also save searches that you return to frequently.
+
+<Image
+  alt="ISJobs seasonal job database with search, job-type filters, location filters, and public openings"
+  caption="Search and filter each job-market season by position, institution, job type, and region."
+  src={'/blog/isjobs-2-beta/job-search.png'}
+  width={1280}
+  height={720}
+/>
+
+The database remains community-maintained. Anyone can submit a missing IS opening without creating an account. Valid submissions are published immediately, and ISJobs checks for duplicate links so that contributing does not create more cleanup work for maintainers. An account is optional; signing in simply lets you keep a contribution history or attach your name to a submission if you want to.
+
+Most importantly, the shared database remains open to everyone. Browsing jobs, searching past seasons, and contributing an opening do not require an account.
+
+# A private home for your own job search
+
+One lesson from talking with candidates is that finding openings is only the beginning. The job market quickly becomes a complicated collection of deadlines, application materials, interviews, campus visits, notes, and decisions. Many candidates build yet another spreadsheet just to keep everything straight.
+
+ISJobs 2.0 now includes a private application tracker. You can save an opening directly from the public database or add a private opportunity that is relevant only to you. Applications can be viewed as a table or a board and moved through stages such as preparing, submitted, interview, campus visit, offer, and closed. Deadlines, notes, and application history stay together instead of being scattered across tabs and documents.
+
+<Image
+  alt="ISJobs private application tracker in dark mode showing jobs across Watch and Prepare, Submitted, Interview, Campus Visit, and Closed stages"
+  caption="The private tracker keeps opportunities, application stages, priorities, and deadlines together."
+  src={'/blog/isjobs-2-beta/tracker-board.png'}
+  width={1578}
+  height={887}
+/>
+
+The tracker is private to your account. The public database is a community resource; your personal job search belongs to you.
+
+I hope this makes ISJobs useful throughout the entire process—not only when you are looking for the next opening.
+
+# Built to last, and built in the open
+
+The new version is no longer tied to Airtable. Postgres is now the source of truth, and the historical Airtable records can be preserved as part of the new seasonal archive. The application also provides CSV and JSON exports and a documented API, so researchers and other community projects can continue to build on the data.
+
+The source code is available at [alanzchen/isjobs](https://github.com/alanzchen/isjobs). I want ISJobs to remain transparent and community-oriented, and I welcome people who want to inspect it, report problems, or help improve it.
+
+# And one more thing…
+
+ISJobs 2.0 has a native interface for AI agents.
+
+Through the open [Model Context Protocol](https://modelcontextprotocol.io/), you can connect ISJobs to MCP-compatible clients such as [ChatGPT or Codex](https://learn.chatgpt.com/docs/extend/mcp), [Claude](https://support.anthropic.com/en/articles/11175166-about-custom-integrations-using-remote-mcp), [Claude Code](https://docs.anthropic.com/en/docs/claude-code/mcp), or another AI agent. Setup and availability differ by client and plan, but ISJobs uses an open protocol rather than an interface tied to a single AI provider. After you sign in and approve the requested permissions, an agent can search and open published jobs, help add missing listings, or work with your private application tracker.
+
+<Image
+  alt="ISJobs API access screen with separate permissions for reading jobs, submitting jobs, reading the tracker, and managing the tracker"
+  caption="Agent access is scoped: public job actions and private tracker permissions remain separate."
+  src={'/blog/isjobs-2-beta/agent-access.png'}
+  width={1280}
+  height={1032}
+/>
+
+This has the potential to change how the database is maintained.
+
+In the original ISJobs, community contributors did a great deal of tedious work by hand: checking whether a position was already listed, copying information from an employer's posting, fitting it into a consistent structure, and entering it into Airtable. With the new agent interface, much of that process can be automated. An AI agent can help read a posting, extract the relevant details, check the existing database, and prepare or submit a structured listing.
+
+Candidates can use the same interface for their own search. You might ask an agent to find current North American assistant-professor openings, compare several positions, add promising jobs to your tracker, or summarize the deadlines coming up next. Instead of repeatedly copying information between a website, a spreadsheet, and an AI chat, the tools can work together directly.
+
+Access is permission-based. Searching public jobs, submitting jobs, reading your tracker, and changing your tracker are separate permissions. You decide what an agent can access, and you can revoke that access later.
+
+This part is still early, but I am especially excited about it. ISJobs began as a way to reduce duplicated effort across our community. AI agents give us a new way to reduce that effort even further while keeping the underlying data open and structured.
+
+# Why beta?
+
+ISJobs 2.0 is a substantial rebuild, and I expect there will be rough edges. Calling it a beta is an invitation: please use it and tell me what does not work.
+
+I would particularly appreciate feedback from candidates and maintainers who use the site in real situations. Can you find the jobs you are looking for? Is anything important missing from the filters? Does the tracker fit your process? Is submitting a job straightforward? Does an explanation or button make no sense?
+
+Bug reports, missing data, confusing experiences, and feature ideas are all useful. You can share feedback with me directly or through the [GitHub repository](https://github.com/alanzchen/isjobs).
+
+# Thank you
+
+ISJobs would not exist without the people who maintain each season, contribute openings, correct records, share the site, and tell me how it has helped them. I am deeply grateful to everyone who has given their time to make the job market a little more transparent for others.
+
+The academic job market is stressful, uncertain, and often isolating. ISJobs cannot change that reality. But perhaps it can make the process a little more organized, a little more open, and a little less lonely.
+
+ISJobs began as a spreadsheet on a webpage. It became something much more meaningful because people used it, maintained it, and trusted it as part of their job-market journey.
+
+I hope [ISJobs 2.0](https://isjobs.xyz) can help even more people.
