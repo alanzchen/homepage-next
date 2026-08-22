@@ -99,9 +99,9 @@ export default function Post({ post, related }: PostProps) {
 
         {related.length ? (
           <div className="flex flex-col items-start gap-10">
-            <h3 className="text-xl">Related posts</h3>
+            <h2 className="text-xl">Related posts</h2>
             <div className="will-change-transform">
-              <PostList posts={related} />
+              <PostList posts={related} headingLevel="h3" />
             </div>
             <Link href="/blog" underline>
               ← See all

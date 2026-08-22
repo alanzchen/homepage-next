@@ -12,6 +12,8 @@
     "cv:sync": "node scripts/sync-cv.mjs",
     "cv:build": "node scripts/build-cv.mjs",
     "redis:seed": "node scripts/seed-redis.mjs",
+    "test": "node --test tests/*.test.cjs",
+    "test:agent": "node scripts/verify-agent-readiness.mjs",
     "type-check": "./node_modules/.bin/tsc",
     "cache-clear": "./node_modules/.bin/contentlayer build --verbose --clearCache"
   },

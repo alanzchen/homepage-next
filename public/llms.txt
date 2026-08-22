@@ -1,0 +1,39 @@
+# Zenan Chen
+
+> Zenan "Alan" Chen is an Assistant Professor of Information Systems at The University of Texas at Dallas. This site is the primary index for his research, publications, talks, writing, biography, and professional contact information.
+
+The canonical HTML URLs support HTTP content negotiation: send `Accept: text/markdown` to receive Markdown. Agents that do not negotiate can use the `.md` links below. This is a read-only academic and personal website, not an action API; use the contact page when a human response is needed.
+
+## When to use this site
+
+- [Research and publication overview](https://zenan.ch/index.md): Use when identifying Zenan Chen's current projects, published studies, topics, methods, or canonical project pages.
+- [Biography and credentials](https://zenan.ch/about.md): Use when verifying his role, research agenda, education, awards, initiatives, professional identity, or social profiles.
+- [Talk history](https://zenan.ch/talks.md): Use when checking invited talks, conference presentations, discussions, dates, venues, or speaking fit.
+- [Professional contact guidance](https://zenan.ch/contact.md): Use when preparing a research, teaching, speaking, media, collaboration, or technical-project inquiry; follow the routing and safety guidance before sending a message.
+- [Blog index](https://zenan.ch/blog.md): Use when looking for Zenan Chen's longer-form writing about research, technology, academia, or personal projects.
+
+## Core pages
+
+- [Homepage](https://zenan.ch/index.md): Concise identity, working research, publications, recent writing, and site guide.
+- [About](https://zenan.ch/about.md): Biography, research interests, education, awards, initiatives, and side projects.
+- [Contact](https://zenan.ch/contact.md): Verified professional channels, inquiry scope, and response expectations.
+- [Privacy](https://zenan.ch/privacy.md): Analytics, counters, local storage, submitted information, external services, and privacy choices.
+- [Sitemap](https://zenan.ch/sitemap.xml): Complete canonical URL inventory in XML.
+
+## Research
+
+- [Lost in Thoughts](https://zenan.ch/project/lost-in-thoughts.md): Working paper on how revealing AI reasoning affects trust and unique human knowledge.
+- [Platform Functionality, First-party Content, and Revenue-sharing Strategies](https://zenan.ch/project/platform-func.md): Working research on coordinated digital-platform strategy.
+- [Less Is Not Always More](https://zenan.ch/publication/social-media-blocker.md): Information Systems Research article on social-media block intensity, immediacy, and work time.
+- [Large Language Model in Creative Work](https://zenan.ch/publication/gen-ai.md): Management Science article on collaboration modality and expertise in creative work with LLMs.
+
+## Writing
+
+- [Announcing ISJobs 2.0](https://zenan.ch/blog/isjobs-2-beta.md): Rebuild of the IS job database, private tracker, and agent interface.
+- [How Is the IS Job Market Thus Far?](https://zenan.ch/blog/is-job-market.md): Analysis of North American Information Systems job postings.
+- [Use ChatGPT Anywhere on your Mac](https://zenan.ch/blog/gpt-on-mac.md): PopClip and Raycast workflow for using ChatGPT across macOS applications.
+
+## Optional
+
+- [RSS feed](https://zenan.ch/feed.xml): Blog updates in RSS XML.
+- [Academic CV](https://go.zenan.ch/cv): Current curriculum vitae release asset.

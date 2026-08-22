@@ -12,9 +12,10 @@ type PostProps = {
     x: number;
     y: number;
   };
+  headingLevel?: "h2" | "h3" | "h4";
 };
 
-export default function Post({ post, mousePosition }: PostProps) {
+export default function Post({ post, mousePosition, headingLevel = "h2" }: PostProps) {
   const { publishedAt, slug, title, image } = post;
   const publishDate = new Date(publishedAt);
   const showNewBadge =
@@ -24,6 +25,7 @@ export default function Post({ post, mousePosition }: PostProps) {
   const imageHeight = 150;
   const imageWidth = 300;
   const imageOffset = 22;
+  const Heading = headingLevel;
   return (
     <li className="py-2.5 group">
       <div className="transition-opacity">
@@ -46,15 +48,17 @@ export default function Post({ post, mousePosition }: PostProps) {
             />
           </motion.div>
         )}
-        <Section heading={formatDate(publishedAt)}>
-          <Link href={`/blog/${slug}`}>
-            {title}
-            {showNewBadge && (
-              <span className="inline-block px-1.5 py-[1px] relative -top-[2px] font-bold ml-2 text-[10px] uppercase rounded-full brand-gradient text-white">
-                New
-              </span>
-            )}
-          </Link>
+        <Section heading={formatDate(publishedAt)} headingAs="p">
+          <Heading>
+            <Link href={`/blog/${slug}`}>
+              {title}
+              {showNewBadge && (
+                <span className="inline-block px-1.5 py-[1px] relative -top-[2px] font-bold ml-2 text-[10px] uppercase rounded-full brand-gradient text-white">
+                  New
+                </span>
+              )}
+            </Link>
+          </Heading>
         </Section>
       </div>
     </li>

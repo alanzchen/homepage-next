@@ -71,18 +71,20 @@ function getConferenceStats(allTalks: Talk[]): ConferenceStat[] {
     });
 }
 
-export function TalkList(talks: Talk[]) {
+export function TalkList(talks: Talk[], headingLevel: "h3" | "h4" = "h3") {
+  const Heading = headingLevel;
+
   return talks
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .map((talk) => (
       <li key={talk.title + talk.conference + talk.date}>
-        <Section heading={talk.date}>
+        <Section heading={talk.date} headingAs="p">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-1">
-              <h3>
-                {talk.discussant && <p className="text-secondary">Discussant for</p>}
+              <Heading>
+                {talk.discussant && <span className="block text-secondary">Discussant for</span>}
                 {talk.title}
-              </h3>
+              </Heading>
               {talk.award &&
                 <p className="text-secondary">
                   <Award award={talk.award} />
@@ -226,6 +228,7 @@ export default function Talks() {
       <NextSeo
         title={seoTitle}
         description={seoDesc}
+        canonical={`${SiteURL}/talks`}
         openGraph={{
           title: seoTitle,
           url: `${SiteURL}/talks`,

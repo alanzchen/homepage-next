@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { NextSeo } from "next-seo";
 import { allPosts, allResearchItems, Post, ResearchItem } from ".contentlayer/generated";
 import { pick } from "lib/pick";
 
@@ -8,12 +9,13 @@ import PostList from "components/postlist";
 
 import { Photo } from "components/Gallery";
 import headshot from "../public/headshot.jpeg";
-import { FullName } from "./about";
+import { FullName, SiteURL } from "./about";
 import { TalkList } from "./talks";
 import Award from "../components/Award";
 import { talks } from "../data/talks";
 import { IconExternalLink } from "../components/Icons";
 import { getResearchItemSortYear } from "../lib/research";
+import HomeStructuredData from "../components/HomeStructuredData";
 
 const ownAuthorNames = new Set([FullName, `Zenan "Alan" Chen`, "Zenan Alan Chen"]);
 const lighterHoverLinkClass = "transition-colors hover:text-secondary";
@@ -62,6 +64,8 @@ type HomeProps = {
 export default function Home({ posts, projects, publications }: HomeProps) {
   return (
     <>
+      <NextSeo canonical={SiteURL} />
+      <HomeStructuredData />
       <div className="flex flex-col gap-20 md:gap-16">
         <div>
           <h1 className="">{`Zenan "Alan" Chen`}</h1>
@@ -72,7 +76,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
             Assistant Professor @ UTD, JSOM<br />
             Ph.D. @ UMN, CSOM<br />
             <br />
-            Our comprehension of techologies often falls behind their adoption.
+            Our comprehension of technologies often falls behind their adoption.
             I study design and use of technologies to fully harness their benefits.
             <br />
             <br />
@@ -115,7 +119,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
             <div className="flex flex-col gap-4">
               <h3 className="text-secondary">Upcoming</h3>
               <ul className="flex flex-col gap-8">
-                {TalkList(futureTalks)}
+                {TalkList(futureTalks, "h4")}
               </ul>
             </div>
           )}
@@ -123,7 +127,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
             <div className="flex flex-col gap-4">
               <h3 className="text-secondary">Recent</h3>
               <ul className="flex flex-col gap-8">
-                {TalkList(recentPastTalks)}
+                {TalkList(recentPastTalks, "h4")}
               </ul>
             </div>
           )}
@@ -140,7 +144,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
 
               return (
                 <li key={project.slug} className="animate-in">
-                  <Section heading={project.working!.time}>
+                  <Section heading={project.working!.time} headingAs="p">
                     <div className="flex flex-col gap-5">
                       <div className="flex flex-col gap-1">
                         <h3>
@@ -183,7 +187,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
 
               return (
                 <li key={publication.slug} className="animate-in">
-                  <Section heading={publication.publication!.publishedAt}>
+                  <Section heading={publication.publication!.publishedAt} headingAs="p">
                     <div className="flex flex-col gap-5">
                       <div className="flex flex-col gap-1">
                         <h3><Link href={`/publication/${publication.slug}`} underline className={lighterHoverLinkClass}>
@@ -240,7 +244,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
           style={{ "--index": 3 } as React.CSSProperties}
         >
           <h2>Recent blog posts</h2>
-          <PostList posts={posts} />
+          <PostList posts={posts} headingLevel="h3" />
           <Link href="/blog" className="items-start underline text-secondary">
             Read all posts
           </Link>

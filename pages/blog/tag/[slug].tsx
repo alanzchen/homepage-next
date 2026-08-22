@@ -21,7 +21,7 @@ const Tag = ({ posts }: TagProps): JSX.Element => {
 
   const seoTitle = `${tag} | ${FullName}`;
   const seoDesc = `Posts about ${tag}`;
-  const url = `${SiteURL}/blog/tag/${tag}`;
+  const url = `${SiteURL}/blog/tag/${slug}`;
 
   return (
     <>

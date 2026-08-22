@@ -34,9 +34,10 @@ function getRelativeCoordinates(
 
 type PostListProps = {
   posts: PostType[];
+  headingLevel?: "h2" | "h3" | "h4";
 };
 
-export default function PostList({ posts }: PostListProps) {
+export default function PostList({ posts, headingLevel = "h2" }: PostListProps) {
   const [mousePosition, setMousePosition] = useState({
     x: 240,
     y: 0,
@@ -52,9 +53,14 @@ export default function PostList({ posts }: PostListProps) {
       onMouseMove={(e) => handleMouseMove(e)}
       className="flex flex-col animated-list"
     >
-      {posts.length === 0 && <p>No posts found</p>}
+      {posts.length === 0 && <li><p>No posts found</p></li>}
       {posts.map((post) => (
-        <Post key={post.slug} post={post} mousePosition={mousePosition} />
+        <Post
+          key={post.slug}
+          post={post}
+          mousePosition={mousePosition}
+          headingLevel={headingLevel}
+        />
       ))}
     </ul>
   );

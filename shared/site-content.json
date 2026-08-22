@@ -1,0 +1,62 @@
+{
+  "contact": {
+    "title": "Contact",
+    "introduction": "Use this page for research, teaching, speaking, media, and technical-project inquiries for Zenan Chen. Providing a clear subject, the relevant organization or event, and any real deadline makes it easier to route and answer a message accurately.",
+    "sections": [
+      {
+        "heading": "Professional inquiries",
+        "paragraphs": [
+          "Research messages are welcome when they concern Information Systems, human-AI collaboration, emerging technology design, digital platforms, field experiments, causal inference, or related work. Please identify the paper or project you are referring to and include enough context to distinguish a specific question from a general request for advice.",
+          "For invited talks, conference participation, classroom visits, media interviews, or collaboration proposals, include the intended audience, format, location or time zone, proposed date, and response deadline. Messages about software and side projects should name the repository, application, or page involved and include a reproducible description when reporting a problem.",
+          "This personal site cannot answer admissions, enrollment, degree-plan, hiring, or other university administrative questions on behalf of The University of Texas at Dallas. Those requests should use the relevant official university office or program channel."
+        ]
+      },
+      {
+        "heading": "Contact details",
+        "paragraphs": [
+          "Primary professional email: zenan.chen@utdallas.edu. General website email: contact@zenan.ch. Professional telephone: +1 972 883 4363. Office and mailing address: JSOM 3.811, Naveen Jindal School of Management, The University of Texas at Dallas, 800 W Campbell Road, Richardson, Texas 75080, United States.",
+          "The email addresses above are the preferred channels for an initial inquiry. Please do not send confidential research data, student records, account credentials, unpublished review materials, or other sensitive information through an unsolicited first message."
+        ]
+      },
+      {
+        "heading": "Response expectations",
+        "paragraphs": [
+          "A response is not guaranteed, especially for mass outreach, generic sales messages, requests outside Zenan Chen's expertise, or messages that do not explain the requested action. If a time-sensitive professional message has not received a reply, one concise follow-up with the original context is appropriate."
+        ]
+      }
+    ]
+  },
+  "privacy": {
+    "title": "Privacy",
+    "introduction": "This notice describes the data practices of zenan.ch, a personal academic website operated by Zenan Chen. It was last updated on August 22, 2026. The site publishes research, talks, writing, and professional contact information; it does not sell visitor data or provide user accounts.",
+    "sections": [
+      {
+        "heading": "Information collected automatically",
+        "paragraphs": [
+          "The site uses Google Analytics, Vercel Analytics, and Vercel Speed Insights to understand aggregate traffic, page usage, and performance. Those services may receive technical information such as the requested page, approximate location derived from an IP address, device or browser characteristics, referring page, timestamps, and performance measurements. Their handling of that information is governed by their own terms and privacy practices.",
+          "Article and research pages also register aggregate view and like counts. Those counters are stored in Upstash Redis by content slug. The site uses browser local storage to remember whether a browser has already liked a particular post and to retain the selected visual theme. These values are functional preferences; they are not used here to create a named user profile."
+        ]
+      },
+      {
+        "heading": "Information you choose to provide",
+        "paragraphs": [
+          "If you send an email, the message, address, attachments, and any other information you include are used to understand and respond to the inquiry. If a newsletter subscription form is offered and you submit an address, that address is sent to Kit, formerly ConvertKit, for subscription processing. Do not submit sensitive personal information unless it is necessary and an appropriate secure channel has been agreed upon.",
+          "Information is retained only as long as reasonably useful for the purpose for which it was received, for recordkeeping, or to satisfy applicable obligations. A message may be deleted without response when it is spam, malicious, unrelated, or unsafe to process."
+        ]
+      },
+      {
+        "heading": "Choices and contact",
+        "paragraphs": [
+          "You can limit analytics through browser privacy controls, content blockers, or the controls offered by the relevant analytics provider. You can clear local storage in your browser to reset the saved theme and local like markers. Disabling these features may affect preferences or displayed interaction state but should not prevent access to the site's published text.",
+          "For a privacy question about this personal site, email contact@zenan.ch and identify the page or interaction involved. Requests concerning university systems, student records, employment records, or official University of Texas at Dallas services must instead be directed to the university office responsible for those systems."
+        ]
+      },
+      {
+        "heading": "External links and changes",
+        "paragraphs": [
+          "The site links to journals, universities, social networks, code hosts, media outlets, and other independent services. Following an external link subjects the visit to that service's policies rather than this notice. This privacy notice may be revised when the site's services or data practices change; the updated date and published text on this page are the authoritative version."
+        ]
+      }
+    ]
+  }
+}

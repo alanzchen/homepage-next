@@ -29,6 +29,7 @@ export default function Blog({ posts }: BlogProps) {
       <NextSeo
         title={seoTitle}
         description={seoDesc}
+        canonical={`${SiteURL}/blog`}
         openGraph={{
           title: seoTitle,
           url: `${SiteURL}/blog/`,

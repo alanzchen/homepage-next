@@ -82,10 +82,11 @@ export default function About({ activities }: { activities: ActivityType[] }) {
       <NextSeo
         title={seoTitle}
         description={seoDesc}
+        canonical={`${SiteURL}/about`}
         openGraph={{
           title: seoTitle,
           description: seoDesc,
-          url: `/about/`,
+          url: `${SiteURL}/about`,
           site_name: `${FullName}`,
         }}
         twitter={{
@@ -108,7 +109,7 @@ export default function About({ activities }: { activities: ActivityType[] }) {
           className="flex flex-col gap-16 animate-in sm:animate-none md:gap-16"
           style={{ "--index": 2 } as React.CSSProperties}
         >
-          <Section heading="About me" headingAlignment="right">
+          <Section heading="About me" headingAlignment="right" headingAs="h1">
             <div className="flex flex-col gap-6">
               <p>
                 <em className="font-semibold">Hi!</em>&nbsp; My name is Zenan (泽南) Chen (陈), I usually go by Alan. I am an assistant professor at University of Texas at Dallas, Jindal School of Management. I received my Ph.D. in Business Administration (Information Systems) from University of Minnesota, Carlson School of Management.
