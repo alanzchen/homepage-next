@@ -143,9 +143,13 @@ html {
   --tw-prose-quotes: var(--sand11);
 }
 
-.blog-prose a {
+/* Subtle URL underlines; existing link components control which links
+   are underlined. Typography sizes, weights, and spacing stay unchanged. */
+a {
   text-decoration-color: var(--sand8);
-  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2.4px;
+  text-decoration-skip-ink: auto;
 }
 
 input[type="search"]::-webkit-search-cancel-button {

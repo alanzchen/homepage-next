@@ -199,7 +199,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
                         )}
                         {publication.publication?.url ? (
                           <Link href={publication.publication.url} underline className={lighterHoverLinkClass}>
-                            <span className="inline-flex items-center underline"><i>{publication.publication.journal}</i> <IconExternalLink className="w-4 h-4 ml-1" /></span>
+                            <span className="inline-flex items-center"><i>{publication.publication.journal}</i> <IconExternalLink className="w-4 h-4 ml-1" /></span>
                           </Link>
                         ) :
                         (
@@ -218,7 +218,7 @@ export default function Home({ posts, projects, publications }: HomeProps) {
                           {publication.publication?.media_coverage && publication.publication.media_coverage.map((media) => (
                             <span key={`${publication.slug}-${media.name}`}>
                               <Link href={media.url} underline className="ml-2">
-                                <span className="inline-flex items-center underline">
+                                <span className="inline-flex items-center">
                                   {media.name}
                                   <IconExternalLink className="w-4 h-4 ml-1" />
                                 </span>
