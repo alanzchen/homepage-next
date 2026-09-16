@@ -215,13 +215,11 @@ export default function Home({ posts, projects, publications }: HomeProps) {
                         }
                         <span>
                           {publication.publication?.media_coverage && "Media coverage: "}
-                          {publication.publication?.media_coverage && publication.publication.media_coverage.map((media) => (
+                          {publication.publication?.media_coverage && publication.publication.media_coverage.map((media, index) => (
                             <span key={`${publication.slug}-${media.name}`}>
-                              <Link href={media.url} underline className="ml-2">
-                                <span className="inline-flex items-center">
-                                  {media.name}
-                                  <IconExternalLink className="w-4 h-4 ml-1" />
-                                </span>
+                              {index > 0 && <span aria-hidden="true">{" · "}</span>}
+                              <Link href={media.url} underline className={lighterHoverLinkClass}>
+                                {media.name}
                               </Link>
                             </span>
                           ))}
