@@ -5,7 +5,10 @@ export interface Talk {
   title: string;
   location: string;
   date: string;
+  presenter?: string;
+  articlePath?: string;
   link?: string;
+  linkLabel?: string;
   award?: string;
   invited?: boolean;
   discussant?: boolean;

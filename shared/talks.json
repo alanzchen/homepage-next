@@ -5,31 +5,38 @@
     "location": "San Francisco, California",
     "award": "Best Student Paper Nominee",
     "date": "Nov 1, 2026",
-    "link": "https://cist2026.github.io/program/"
+    "link": "https://cist2026.github.io/program/",
+    "articlePath": "/project/socratic-questioning",
+    "linkLabel": "Program",
+    "presenter": "Junyu Zhang"
   },
   {
     "conference": "Taiwan Summer Workshop on Information Management (TSWIM)",
     "title": "Lost in Thoughts: Revealing AI Reasoning Increases Trust but Crowds Out Unique Human Knowledge",
     "location": "Hsinchu, Taiwan",
-    "date": "Jun 30, 2026"
+    "date": "Jun 30, 2026",
+    "articlePath": "/project/lost-in-thoughts"
   },
   {
     "conference": "Symposium on Statistical Challenges in Electronic Commerce Research (SCECR)",
     "title": "Lost in Thoughts: Revealing AI Reasoning Increases Trust but Crowds Out Unique Human Knowledge",
     "location": "Tokyo, Japan",
-    "date": "Jun 23, 2026"
+    "date": "Jun 23, 2026",
+    "articlePath": "/project/lost-in-thoughts"
   },
   {
     "conference": "BizAI at UT Dallas",
     "title": "Lost in Thoughts: Revealing AI Reasoning Increases Trust but Crowds Out Unique Human Knowledge",
     "location": "Richardson, Texas",
-    "date": "Mar 28, 2026"
+    "date": "Mar 28, 2026",
+    "articlePath": "/project/lost-in-thoughts"
   },
   {
     "conference": "Workshop on Information Systems and Economics (WISE)",
     "title": "Lost in Thoughts: Revealing AI Reasoning Increases Trust but Crowds Out Unique Human Knowledge",
     "location": "Nashville, Tennessee",
-    "date": "Dec 18, 2025"
+    "date": "Dec 18, 2025",
+    "articlePath": "/project/lost-in-thoughts"
   },
   {
     "conference": "Workshop on Information Systems and Economics (WISE)",
@@ -60,13 +67,15 @@
     "title": "Large Language Model In Creative Work",
     "location": "Online",
     "date": "Jul 25, 2024",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Annual AI in Management (AIM) Conference",
     "title": "Large Language Model In Creative Work",
     "location": "Los Angeles, California",
-    "date": "Mar 15, 2024"
+    "date": "Mar 15, 2024",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Workshop on Information Technologies and Systems (WITS)",
@@ -80,35 +89,40 @@
     "title": "Large Language Model In Creative Work",
     "location": "Davis, California",
     "date": "Dec 8, 2023",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "University of Rochester",
     "title": "Large Language Model In Creative Work",
     "location": "Rochester, New York",
     "date": "Dec 11, 2023",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Johns Hopkins University",
     "title": "Large Language Model In Creative Work",
     "location": "Baltimore, Maryland",
     "date": "Dec 5, 2023",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Northeastern University",
     "title": "Large Language Model In Creative Work",
     "location": "Boston, Massachusetts",
     "date": "Nov 21, 2023",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "University of Texas at Dallas",
     "title": "Large Language Model In Creative Work",
     "location": "Dallas, Texas",
     "date": "Nov 29, 2023",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Workshop on e-Business (WeB)",
@@ -116,7 +130,9 @@
     "award": "Best Completed Research Paper Runner-up",
     "link": "https://credsverse.com/credentials/982584eb-2d56-47a5-b604-d0e7ef6b5eea",
     "location": "Online",
-    "date": "Dec 9, 2023"
+    "date": "Dec 9, 2023",
+    "articlePath": "/publication/gen-ai",
+    "linkLabel": "Award"
   },
   {
     "conference": "HKU Business School",
@@ -124,7 +140,9 @@
     "location": "Hong Kong, China",
     "date": "Nov 2, 2023",
     "link": "https://www.hkubs.hku.hk/event/how-large-language-model-in-creative-work-the-role-of-collaboration-modality-and-user-expertise/",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai",
+    "linkLabel": "Event"
   },
   {
     "conference": "CUHK Business School",
@@ -132,44 +150,52 @@
     "location": "Hong Kong, China",
     "date": "Oct 30, 2023",
     "link": "https://www.bschool.cuhk.edu.hk/events/large-language-model-in-creative-work-the-role-of-collaboration-modality-and-user-expertise/",
-    "invited": true
+    "invited": true,
+    "articlePath": "/publication/gen-ai",
+    "linkLabel": "Event"
   },
   {
     "conference": "Workshop on Information Systems and Economics (WISE)",
     "title": "Large Language Model In Creative Work",
     "location": "Online",
-    "date": "Dec 13, 2023"
+    "date": "Dec 13, 2023",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Conference on Artificial Intelligence, Machine Learning, and Business Analytics",
     "title": "Large Language Model In Creative Work",
     "location": "Philadelphia, Pannsylvania",
-    "date": "Dec 1, 2023"
+    "date": "Dec 1, 2023",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Conference on Digital Experimentation (CoDE) @ MIT",
     "title": "Large Language Model In Creative Work",
     "location": "Cambridge, Massachusetts",
-    "date": "Nov 10, 2023"
+    "date": "Nov 10, 2023",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Conference in Information Systems and Technology (CIST)",
     "title": "Large Language Model In Creative Work",
     "award": "Best Student Paper Award Runner-up",
     "location": "Phoenix, Arizona",
-    "date": "Oct 14, 2023"
+    "date": "Oct 14, 2023",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "INFORMS Annual Meeting",
     "title": "Large Language Model In Creative Work",
     "location": "Phoenix, Arizona",
-    "date": "Oct 15, 2023"
+    "date": "Oct 15, 2023",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "Business & Generative AI Workshop @ Wharton",
     "title": "Large Language Model In Creative Work",
     "location": "San Francisco, California",
-    "date": "Sep 8, 2023"
+    "date": "Sep 8, 2023",
+    "articlePath": "/publication/gen-ai"
   },
   {
     "conference": "International Conference on Information Systems (ICIS)",
@@ -177,7 +203,9 @@
     "award": "Best Paper in General IS Track",
     "location": "Copenhagen, Denmark",
     "date": "Dec 13, 2022",
-    "link": "https://aisel.aisnet.org/icis2022/general_is/general_is/1/"
+    "link": "https://aisel.aisnet.org/icis2022/general_is/general_is/1/",
+    "articlePath": "/publication/social-media-blocker",
+    "linkLabel": "Paper"
   },
   {
     "conference": "Conference in Information Systems and Technology (CIST)",
@@ -189,13 +217,15 @@
     "conference": "Conference in Information Systems and Technology (CIST)",
     "title": "Investigating the Coordination of Functionality Richness, First-party Content Quality, and Revenue-sharing on Digital Platforms",
     "location": "Virtual",
-    "date": "Nov 8, 2020"
+    "date": "Nov 8, 2020",
+    "articlePath": "/project/platform-func"
   },
   {
     "conference": "Conference in Information Systems and Technology (CIST)",
     "title": "Less is Not Always More: Investigating the Impact of Block Intensity and Immediacy of Social Media Blockers on Productivity",
     "location": "Indianapolis, Indiana",
-    "date": "Oct 16, 2022"
+    "date": "Oct 16, 2022",
+    "articlePath": "/publication/social-media-blocker"
   },
   {
     "conference": "Workshop on Information Technologies and Systems (WITS)",
@@ -203,13 +233,16 @@
     "award": "Best Student Paper Award",
     "location": "Copenhagen, Denmark",
     "date": "Dec 14, 2022",
-    "link": "https://witsconf.org/wits2022-awards/"
+    "link": "https://witsconf.org/wits2022-awards/",
+    "articlePath": "/publication/social-media-blocker",
+    "linkLabel": "Award"
   },
   {
     "conference": "Workshop on Information Technologies and Systems (WITS)",
     "title": "Investigating the Coordination of Functionality Richness, First-party Content Quality, and Revenue-sharing on Digital Platforms",
     "location": "Austin, Texas",
-    "date": "Dec 16, 2021"
+    "date": "Dec 16, 2021",
+    "articlePath": "/project/platform-func"
   },
   {
     "conference": "Symposium on Statistical Challenges in Electronic Commerce Research (SCECR)",
@@ -221,32 +254,38 @@
     "conference": "Symposium on Statistical Challenges in Electronic Commerce Research (SCECR)",
     "title": "Less is Not Always More: Investigating the Impact of Block Intensity and Immediacy of Social Media Blockers on Productivity",
     "location": "Madrid, Spain",
-    "date": "Jun 21, 2022"
+    "date": "Jun 21, 2022",
+    "articlePath": "/publication/social-media-blocker"
   },
   {
     "conference": "Platform Strategy Symposium",
     "title": "Investigating the Coordination of Functionality Richness, First-party Content Quality, and Revenue-sharing on Digital Platforms",
     "location": "Boston, Massachusetts",
     "link": "https://www.youtube.com/watch?v=iQK2ZKabHdI",
-    "date": "Jul 19, 2022"
+    "date": "Jul 19, 2022",
+    "articlePath": "/project/platform-func",
+    "linkLabel": "Video"
   },
   {
     "conference": "Conference on Digital Experimentation (CoDE) @ MIT",
     "title": "Less is Not Always More: Investigating the Impact of Block Intensity and Immediacy of Social Media Blockers on Productivity",
     "location": "Cambridge, Massachusetts",
-    "date": "Oct 21, 2022"
+    "date": "Oct 21, 2022",
+    "articlePath": "/publication/social-media-blocker"
   },
   {
     "conference": "Americas Conference on Information Systems (AMCIS)",
     "title": "Less is Not Always More: Investigating the Impact of Block Intensity and Immediacy of Social Media Blockers on Productivity",
     "location": "Minneapolis, Minnesota",
-    "date": "Aug 13, 2022"
+    "date": "Aug 13, 2022",
+    "articlePath": "/publication/social-media-blocker"
   },
   {
     "conference": "INFORMS Annual Meeting",
     "title": "Investigating the Coordination of Functionality Richness, First-party Content Quality, and Revenue-sharing on Digital Platforms",
     "location": "Indianapolis, Indiana",
-    "date": "Oct 18, 2022"
+    "date": "Oct 18, 2022",
+    "articlePath": "/project/platform-func"
   },
   {
     "conference": "China Workshop on Economics of Information Systems Theory (CWEIST)",
@@ -258,12 +297,14 @@
     "conference": "China Workshop on Economics of Information Systems Theory (CWEIST)",
     "title": "Investigating the Coordination of Functionality Richness, First-party Content Quality, and Revenue-sharing on Digital Platforms",
     "location": "Virtual",
-    "date": "Jun 28, 2021"
+    "date": "Jun 28, 2021",
+    "articlePath": "/project/platform-func"
   },
   {
     "conference": "Industry Studies Association (ISA) Annual Conference",
     "title": "Less is Not Always More: Investigating the Impact of Block Intensity and Immediacy of Social Media Blockers on Productivity",
     "location": "Philadelphia, Pennsylvania",
-    "date": "Jun 25, 2022"
+    "date": "Jun 25, 2022",
+    "articlePath": "/publication/social-media-blocker"
   }
 ]

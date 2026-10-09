@@ -83,8 +83,13 @@ export function TalkList(talks: Talk[], headingLevel: "h3" | "h4" = "h3") {
             <div className="flex flex-col gap-1">
               <Heading>
                 {talk.discussant && <span className="block text-secondary">Discussant for</span>}
-                {talk.title}
+                {talk.articlePath ? (
+                  <Link href={talk.articlePath} underline className="transition-colors hover:text-secondary">
+                    {talk.title}
+                  </Link>
+                ) : talk.title}
               </Heading>
+              {talk.presenter && <p className="text-secondary">Presenter: {talk.presenter}</p>}
               {talk.award &&
                 <p className="text-secondary">
                   <Award award={talk.award} />
@@ -100,7 +105,7 @@ export function TalkList(talks: Talk[], headingLevel: "h3" | "h4" = "h3") {
               </p>
               <p className="text-secondary">{talk.location}</p>
               {talk.link && <Link href={`${talk.link}`} underline>
-                Read More
+                {talk.linkLabel || "Program"}
               </Link>}
             </div>
           </div>
