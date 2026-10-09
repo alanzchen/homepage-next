@@ -44,7 +44,12 @@
     "location": "Nashville, Tennessee",
     "date": "Dec 18, 2025",
     "invited": true,
-    "discussant": true
+    "discussant": true,
+    "authors": [
+      "Rachit Kamdar",
+      "Balaji Padmanabhan",
+      "Siva Viswanathan"
+    ]
   },
   {
     "conference": "UT Austin",
@@ -52,7 +57,10 @@
     "location": "Online",
     "date": "Nov 18, 2025",
     "invited": true,
-    "discussant": false
+    "discussant": false,
+    "authors": [
+      "Zenan Chen"
+    ]
   },
   {
     "conference": "Workshop on Information Technologies and Systems (WITS)",
@@ -60,7 +68,12 @@
     "location": "Bangkok, Thailand",
     "date": "Dec 20, 2024",
     "invited": true,
-    "discussant": true
+    "discussant": true,
+    "authors": [
+      "Zhe Wang",
+      "Dengpan Liu",
+      "Subodha Kumar"
+    ]
   },
   {
     "conference": "ISPOC",
@@ -82,7 +95,10 @@
     "title": "Design Considerations of Information Systems Artifacts and Digital Platforms",
     "location": "Online",
     "award": "Best Dissertation Award",
-    "date": "Dec 13, 2023"
+    "date": "Dec 13, 2023",
+    "authors": [
+      "Zenan Chen"
+    ]
   },
   {
     "conference": "University of California, Davis",
@@ -211,7 +227,12 @@
     "conference": "Conference in Information Systems and Technology (CIST)",
     "title": "Net Neutrality: Network Congestion, Social Welfare and Service Tiering Regulations",
     "location": "Seattle, Washington",
-    "date": "Oct 19, 2019"
+    "date": "Oct 19, 2019",
+    "authors": [
+      "Zenan Chen",
+      "Soumya Sen",
+      "Alok Gupta"
+    ]
   },
   {
     "conference": "Conference in Information Systems and Technology (CIST)",
@@ -291,7 +312,12 @@
     "conference": "China Workshop on Economics of Information Systems Theory (CWEIST)",
     "title": "Dynamics of User Preference in Broadband Market",
     "location": "Virtual",
-    "date": "Jun 30, 2020"
+    "date": "Jun 30, 2020",
+    "authors": [
+      "Zenan Chen",
+      "Soumya Sen",
+      "Alok Gupta"
+    ]
   },
   {
     "conference": "China Workshop on Economics of Information Systems Theory (CWEIST)",

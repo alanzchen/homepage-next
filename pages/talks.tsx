@@ -11,6 +11,7 @@ import ConferenceCountBadge from "../components/ConferenceCountBadge";
 import { talks, type Talk } from "../data/talks";
 import conferenceShortNames from "../data/conferenceShortNames.json";
 import Tooltip from "../components/Tooltip";
+import PresenterIcon from "../components/PresenterIcon";
 
 const seoTitle = `Talks | ${FullName}`;
 const seoDesc = `Invited talks and presentations.`;
@@ -85,11 +86,31 @@ export function TalkList(talks: Talk[], headingLevel: "h3" | "h4" = "h3") {
                 {talk.discussant && <span className="block text-secondary">Discussant for</span>}
                 {talk.articlePath ? (
                   <Link href={talk.articlePath} underline className="transition-colors hover:text-secondary">
-                    {talk.title}
+                    {talk.title.replace(/ \(by .+\)$/, "")}
                   </Link>
-                ) : talk.title}
+                ) : talk.title.replace(/ \(by .+\)$/, "")}
               </Heading>
-              {talk.presenter && <p className="text-secondary">Presenter: {talk.presenter}</p>}
+              {talk.authors && (
+                <p className="text-secondary">
+                  {talk.authors.map((author, index) => (
+                    <React.Fragment key={author}>
+                      {index > 0 && ", "}
+                      <span className={`inline-flex items-center gap-1 ${author === FullName ? "text-primary" : ""}`}>
+                        {author}
+                        {author === (talk.presenter || FullName) && !talk.discussant && (
+                          <span title="Presenter">
+                            <PresenterIcon />
+                            <span className="sr-only"> (Presenter)</span>
+                          </span>
+                        )}
+                      </span>
+                    </React.Fragment>
+                  ))}
+                </p>
+              )}
+              {talk.presenter && !talk.authors?.includes(talk.presenter) && (
+                <p className="text-secondary">Presenter: {talk.presenter}</p>
+              )}
               {talk.award &&
                 <p className="text-secondary">
                   <Award award={talk.award} />
